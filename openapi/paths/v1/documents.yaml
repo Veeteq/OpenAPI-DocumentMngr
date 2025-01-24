@@ -14,6 +14,25 @@ parameters:
     schema:
         type: integer
         format: int64
+get: 
+  tags: 
+    - Document
+  summary: "Get list of documents"
+  description: "Get list of documents"
+  operationId: "listDocuments"
+  responses: 
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema: 
+            $ref: ../../components/schemas/v1/documents.yaml
+    '400':
+      description: "Not found"
+      content: 
+        application/json:
+          schema: 
+            $ref: ../../components/schemas/Problem.yaml
 post:
   tags:
     - Admin
@@ -36,11 +55,11 @@ post:
             discriminator:
               propertyName: userType
               mapping:
-                admin: '../components/schemas/Admin.yaml'
-                basic: '../components/schemas/Basic.yaml'
+                admin: '../../components/schemas/Admin.yaml'
+                basic: '../../components/schemas/Basic.yaml'
             anyOf:
-              - $ref: '../components/schemas/Admin.yaml'
-              - $ref: '../components/schemas/Basic.yaml'
+              - $ref: '../../components/schemas/Admin.yaml'
+              - $ref: '../../components/schemas/Basic.yaml'
         application/xml:
           schema:
             type: object

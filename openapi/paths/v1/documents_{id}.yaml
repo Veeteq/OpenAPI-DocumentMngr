@@ -1,0 +1,25 @@
+get: 
+  tags: 
+    - Document
+  summary: "Get document by ID"
+  description: "Get document by ID"
+  operationId: "getDocumentById"
+  parameters: 
+    - name: id
+      in: path
+      description: ID of the document
+      required: true
+      schema: 
+        type: integer
+        format: int64
+  responses: 
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema: 
+            $ref: ../../components/schemas/v1/document.yaml
+    '400':
+      description: "Bad request"
+    '404':
+      description: "Not found"

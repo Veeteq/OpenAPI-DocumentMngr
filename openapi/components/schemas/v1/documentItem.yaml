@@ -1,0 +1,26 @@
+type: object
+properties:
+  itemId:
+    type: integer
+    format: int64
+    description: Unique identifier for the document item
+    example: 98765
+  itemName:
+    type: string
+    description: Name of the document item
+    example: "Product A"
+  itemQuantity:
+    type: integer
+    format: int32
+    description: Quantity of the document item
+    example: 10
+  itemPrice:
+    type: string
+    #format: double
+    description: Price of the document item
+    example: 100.50
+    pattern: "^-?(?:0|[1-9]\\d{0,2}(?:,?]\\d{3})*)(?:\\.\\d+)?$"
+  itemComment:
+    type: string
+    description: Additional details for the document item
+    example: "Other info about Product A"    

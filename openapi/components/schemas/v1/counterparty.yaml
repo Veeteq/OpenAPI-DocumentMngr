@@ -1,0 +1,11 @@
+type: object
+properties:
+  counterpartyId:
+    type: integer
+    format: int64
+    description: Unique identifier for the counterparty
+    example: 54321
+  counterpartyName:
+    type: string
+    description: Name of the counterparty
+    example: "ABC Corp"
