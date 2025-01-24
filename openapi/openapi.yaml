@@ -16,30 +16,19 @@ info:
   description: >
     This is an **example** API to demonstrate features of the OpenAPI
     specification.
-
-    # Introduction
-
-    This API definition is intended to to be a good starting point for Document Management System
-
 externalDocs:
   description: "Find out how to create a GitHub repo for your OpenAPI definition."
   url: 'https://github.com/Redocly/create-openapi-repo'
 tags:
   - name: Document
     description: "Operations on Documents."
-  # - name: User
-  #   description: "Example actions on user accounts."
-  # - name: Admin
-  #   description: "Example operations reserved for administrators."
-  # - name: Info
-  #   description: "Example operations for retrieving information."
-  # - name: Tag
-  #   description: "This is a tag description."
+  - name: Item
+    description: "Example actions on user accounts."
 x-tagGroups:
   - name: General
     tags:
-      - User
-      - Info
+      - Document
+      - Item
       - Echo
   - name: Administration
     tags:
@@ -52,18 +41,16 @@ servers:
         description: Your tenant id
   - url: http://localhost/api/v1
 paths:
-  # '/users/{username}':
-  #   $ref: 'paths/users_{username}.yaml'
-  '/document':
-    $ref: 'paths/document.yaml'
-  # '/user/list':
-  #   $ref: 'paths/user-status.yaml'
-  # /pathItem:
-  #   $ref: paths/pathItem.yaml
-  # /pathItemWithExamples:
-  #   $ref: paths/pathItemWithExamples.yaml
-  # '/echo':
-  #   $ref: 'paths/echo.yaml'
+  /v1/documents:
+    $ref: 'paths/v1/documents.yaml'
+  /v1/documents/{id}:
+    $ref: 'paths/v1/documents_{id}.yaml'
+  /v1/items:
+    $ref: 'paths/v1/items.yaml'  
+  /v1/items/{id}:
+    $ref: 'paths/v1/items_{id}.yaml'  
+security:
+  - basic_auth: []
 components:
   securitySchemes:
     main_auth:

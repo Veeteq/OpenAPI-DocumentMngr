@@ -1,0 +1,25 @@
+get: 
+  tags: 
+    - Item
+  summary: "Get item by ID"
+  description: "Get item by ID"
+  operationId: "getItemById"
+  parameters: 
+    - name: id
+      in: path
+      description: ID of the item
+      required: true
+      schema: 
+        type: integer
+        format: int64
+  responses: 
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema: 
+            $ref: ../../components/schemas/v1/item.yaml
+    '400':
+      description: "Bad request"
+    '404':
+      description: "Not found"
