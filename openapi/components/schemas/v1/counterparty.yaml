@@ -5,6 +5,7 @@ properties:
     format: int64
     description: Unique identifier for the counterparty
     example: 54321
+    readOnly: true
   counterpartyName:
     type: string
     description: Name of the counterparty

@@ -5,6 +5,7 @@ properties:
     format: int64
     description: Unique identifier for the category
     example: 12345
+    readOnly: true
   categoryName:
     type: string
     description: Name of the category

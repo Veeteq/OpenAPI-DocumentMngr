@@ -1,10 +1,16 @@
 type: object
+required:
+  - documentDate
+  - documentType
+  - documentName
+  - account
 properties:
   documentId:
     type: integer
     format: int64
     description: Unique identifier for the document
     example: 12345
+    readOnly: true
   documentDate:
     type: string
     format: date
@@ -14,14 +20,18 @@ properties:
     type: string
     description: Type of the document
     example: "Invoice"
+    minLength: 3
+    maxLength: 25
   documentName:
     type: string
     description: Name of the document
     example: "October Invoice"
+    minLength: 3
+    maxLength: 255
   documentComment:
     type: string
     description: Additional info related to the document
-    example: "Details for October Invoice"    
+    example: "Details for October Invoice"
   account:
     $ref: 'account.yaml'
     description: Base Account associated with the document
@@ -50,8 +60,13 @@ properties:
     format: int32
     description: Number of items in the document
     example: 5
+    minItems: 1
   documentItems:
     type: array
     description: List of items in the document
     items:
-      $ref: 'documentItem.yaml'
+      $ref: document_item_response.yaml
+  createDateTime:
+    $ref: ../common/iso_timestamp.yaml
+  updateDateTime:
+    $ref: ../common/iso_timestamp.yaml

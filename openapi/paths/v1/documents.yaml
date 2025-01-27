@@ -14,58 +14,51 @@ parameters:
     schema:
         type: integer
         format: int64
-get: 
-  tags: 
+get:
+  tags:
     - Document
   summary: "Get list of documents"
   description: "Get list of documents"
   operationId: "listDocuments"
-  responses: 
+  responses:
     '200':
       description: "Success"
       content:
         application/json:
-          schema: 
+          schema:
             $ref: ../../components/schemas/v1/documents.yaml
     '400':
       description: "Not found"
-      content: 
+      content:
         application/json:
-          schema: 
+          schema:
             $ref: ../../components/schemas/Problem.yaml
 post:
   tags:
-    - Admin
-  summary: Create a new user
-  description: "This operation creates a new user profile. Only administrators can create user profiles."
-  operationId: createUser
-  responses:
-    '200':
-      description: Successfully created a user
-    '405':
-      description: Invalid input
-  security:
-    - main_auth:
-        - 'read:users'
-        - 'write:users'
+    - Document
+  summary: Create a new document
+  description: "This operation creates a new financial document"
+  operationId: createDocument
   requestBody:
     content:
         application/json:
           schema:
-            discriminator:
-              propertyName: userType
-              mapping:
-                admin: '../../components/schemas/Admin.yaml'
-                basic: '../../components/schemas/Basic.yaml'
-            anyOf:
-              - $ref: '../../components/schemas/Admin.yaml'
-              - $ref: '../../components/schemas/Basic.yaml'
-        application/xml:
+            $ref: ../../components/schemas/v1/document_request.yaml
+    description: "User request to be added to the database."
+    required: true  
+  responses:
+    '201':
+      description: "Created"
+      headers: 
+        Location:
+          description: Resource location of new document
+          schema: 
+            type: string
+            format: url
+            example: /v1/documents/1234
+    '400':
+      description: "Not found"
+      content:
+        application/json:
           schema:
-            type: object
-            properties:
-                name: 
-                  type: string
-                  description: Example description
-    description: "User profile to be added to the database."
-    required: true
+            $ref: ../../components/schemas/Problem.yaml

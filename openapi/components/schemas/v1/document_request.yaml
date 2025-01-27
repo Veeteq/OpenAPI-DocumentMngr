@@ -1,0 +1,76 @@
+type: object
+required:
+  - date
+  - type
+  - accountId
+  - paymentMethod
+properties:
+  date:
+    type: string
+    format: date
+    description: Date of the document
+    example: "2023-10-01"
+  type:
+    type: string
+    description: Type of the document
+    example: "Invoice"
+  name:
+    type: string
+    description: Name of the document
+    example: "October Invoice"
+  invoiceNumber:
+    type: 
+      - string
+      - 'null'
+    description: Invoice number of the document
+    example: "INV-12345"
+  accountId:
+    type: integer
+    format: int64
+    description: Unique identifier for the account
+    example: 67890
+  targetAccountId:
+    type: 
+      - integer
+      - 'null'
+    format: int64
+    description: Unique identifier for the target account
+    example: 98765
+  transferAmount:
+    type: 
+      - number
+      - 'null'
+    format: double
+    description: Amount to be transferred
+    example: 1500.75
+  counterpartyId:
+    type: 
+      - integer
+      - 'null'
+    format: int64
+    description: Unique identifier for the counterparty
+    example: 54321
+  paymentMethod:
+    type: string
+    description: Payment method for the document
+    example: "Credit Card"
+  currencyCode:
+    type: string
+    description: Currency code of the transfer amount
+    example: "USD"
+    default: 'PLN'
+  exchangeRate:
+    type: number
+    format: double
+    description: Exchange rate applicable to the transfer amount
+    example: 1.12
+    default: 1.0
+    minimum: 0.0
+    exclusiveMinimum: 0.0
+    multipleOf: 0.000001
+  documentItems:
+    type: array
+    description: List of items in the document
+    minLength: 1
+    items:
+      $ref: document_item_request.yaml
