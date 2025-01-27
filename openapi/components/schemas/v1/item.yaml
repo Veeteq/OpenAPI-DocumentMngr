@@ -5,6 +5,7 @@ properties:
     format: int64
     description: Unique identifier for the item
     example: 12345
+    readOnly: true
   itemName:
     type: string
     description: Name of the item
