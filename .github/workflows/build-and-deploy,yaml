@@ -1,9 +1,5 @@
 name: Build and Deploy API docs
-on:
-  push:
-    branches:
-      - develop
-      - main
+on: [push]
 
 jobs:
   build:
