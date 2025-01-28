@@ -11,4 +11,3 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install Redocly CLI
         run: npm install -g @redocly/cli@latest
-      - name: Run scipt to bundle and publish the API docs
