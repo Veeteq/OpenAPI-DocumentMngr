@@ -1,5 +1,5 @@
 name: Build and Deploy API docs
-on: 
+on:
   push:
     branches:
       - develop
@@ -11,15 +11,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup node
-        uses: actions/setup-node@v4  
-      - name: Install Redocly CLI  
-        run: npm install -g @redocly/cli@latest  
-      - name: Run Lint Bundle  
+        uses: actions/setup-node@v4
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli@latest
+      - name: Run Lint Bundle
         run: redocly bundle -o bundle.yaml openapi/openapi.yaml && \
              redocly build-docs bundle.yaml -o index.html
       - name: Deploy to Github pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: .  
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: .
           force_orphan: true
           exclude_assets: '.github,openapi,.redocly.yaml,make.sh'
