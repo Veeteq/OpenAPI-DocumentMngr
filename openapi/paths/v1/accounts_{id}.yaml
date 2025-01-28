@@ -1,0 +1,25 @@
+get: 
+  tags: 
+    - Account
+  summary: "Get account by ID"
+  description: "Get single account by ID"
+  operationId: "getAccountById"
+  parameters: 
+    - name: id
+      in: path
+      description: ID of the account
+      required: true
+      schema: 
+        type: integer
+        format: int64
+  responses: 
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema: 
+            $ref: ../../components/schemas/v1/account.yaml
+    '400':
+      description: "Bad request"
+    '404':
+      description: "Not found"

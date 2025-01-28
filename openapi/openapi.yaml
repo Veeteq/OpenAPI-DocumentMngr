@@ -21,15 +21,17 @@ externalDocs:
   url: 'https://github.com/Redocly/create-openapi-repo'
 tags:
   - name: Document
-    description: "Operations on Documents."
+    description: "Describes operations on Documents."
   - name: Item
-    description: "Example actions on user accounts."
+    description: "Describes operations on Items."
+  - name: Account
+    description: "Describes operations on Accounts."
 x-tagGroups:
   - name: General
     tags:
       - Document
       - Item
-      - Echo
+      - Account
   - name: Administration
     tags:
       - Admin
@@ -46,9 +48,13 @@ paths:
   /v1/documents/{id}:
     $ref: 'paths/v1/documents_{id}.yaml'
   /v1/items:
-    $ref: 'paths/v1/items.yaml'  
+    $ref: 'paths/v1/items.yaml'
   /v1/items/{id}:
-    $ref: 'paths/v1/items_{id}.yaml'  
+    $ref: 'paths/v1/items_{id}.yaml'
+  /v1/accounts:
+    $ref: 'paths/v1/accounts.yaml'
+  /v1/accounts/{id}:
+    $ref: 'paths/v1/accounts_{id}.yaml'    
 security:
   - basic_auth: []
 components:
