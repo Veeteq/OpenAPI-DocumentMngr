@@ -8,7 +8,7 @@ jobs:
         name: Checkout repository
       - uses: actions/setup-node@v4  
         name: Setup node
-      - run: npm install -g redocly/cli@latest  
+      - run: npm install -g @redocly/cli@latest  
         name: Install Redocly CLI
       - run: redocly lint ./openapi/openapi.yaml --format=github-actions
         name: Run Lint Test  
