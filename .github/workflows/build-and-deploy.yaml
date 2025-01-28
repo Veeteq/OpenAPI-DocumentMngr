@@ -16,8 +16,8 @@ jobs:
         run: npm install -g @redocly/cli@latest
       - name: Redocly Bundle && Build Docs
         run: |
-            redocly bundle -o bundle.yaml openapi/openapi.yaml
-            redocly build-docs bundle.yaml -o index.html
+            redocly bundle -o openapi.yaml openapi/openapi.yaml
+            redocly build-docs openapi.yaml -o index.html
       - name: Deploy to Github pages
         uses: peaceiris/actions-gh-pages@v4
         with:
