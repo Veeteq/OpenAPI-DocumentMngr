@@ -1,0 +1,19 @@
+get:
+  tags:
+    - Account
+  summary: "Get list of accounts"
+  description: "Get list of accounts"
+  operationId: "listAccounts"
+  responses:
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/v1/account.yaml
+    '400':
+      description: "Not found"
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Problem.yaml
