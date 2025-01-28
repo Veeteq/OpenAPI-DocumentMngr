@@ -1,4 +1,4 @@
-nanme: API Linting with Redocly
+name: API Linting with Redocly
 on: [pull_request]
 jobs:
   build:
