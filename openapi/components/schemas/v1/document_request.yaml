@@ -70,7 +70,6 @@ properties:
     format: double
     description: Exchange rate applicable to the transfer amount
     example: 1.12
-    default: 1.0
     minimum: 0.0
     exclusiveMinimum: 0.0
     multipleOf: 0.000001
