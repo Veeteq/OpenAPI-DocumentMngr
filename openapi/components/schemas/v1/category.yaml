@@ -10,3 +10,5 @@ properties:
     type: string
     description: Name of the category
     example: "A cateogry for the item"
+required:
+  - categoryName
