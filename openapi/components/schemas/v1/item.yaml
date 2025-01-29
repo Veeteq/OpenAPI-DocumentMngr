@@ -11,4 +11,4 @@ properties:
     description: Name of the item
     example: "An item"
   itemCategory:
-    $ref: category.yaml  
+    $ref: category.yaml

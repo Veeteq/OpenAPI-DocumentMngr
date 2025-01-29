@@ -60,7 +60,7 @@ properties:
     format: int32
     description: Number of items in the document
     example: 5
-    minItems: 1
+    minimum: 1
   documentItems:
     type: array
     description: List of items in the document

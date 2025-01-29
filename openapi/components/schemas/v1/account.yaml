@@ -10,3 +10,5 @@ properties:
     type: string
     description: Name of the account
     example: "Main Account"
+required:
+  - accountName
