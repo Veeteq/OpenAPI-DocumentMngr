@@ -10,7 +10,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/v1/account.yaml
+            $ref: ../../components/schemas/v1/accounts.yaml
     '400':
       description: "Not found"
       content:
