@@ -6,6 +6,7 @@ properties:
     example: 25
   totalItems:
     type: integer
+    format: int64
     description: The total number of items available.
     example: 100
   totalPages:
