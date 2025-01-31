@@ -1,5 +1,9 @@
 type: object
 properties: 
+  pageSize:
+    type: integer
+    description: Number of items on page.
+    example: 25
   totalItems:
     type: integer
     description: The total number of items available.
