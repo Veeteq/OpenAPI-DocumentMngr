@@ -1,5 +1,5 @@
 type: object
-properties:
+properties: 
   totalItems:
     type: integer
     description: The total number of items available.
@@ -12,7 +12,3 @@ properties:
     type: integer
     description: The current page number.
     example: 1
-  items:
-    type: array
-    items:
-      $ref: item.yaml
