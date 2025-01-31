@@ -1,10 +1,10 @@
 # Document Manager OpenAPI repository
 
 ## The generated OpenAPI specification can be accessed at:
-![OpenAPI](https://veeteq.github.io/OpenAPI-DocumentMngr/)
+[OpenAPI](https://veeteq.github.io/OpenAPI-DocumentMngr/)
 
 ## Or just direct access to the generated OpenAPI file:
-![openapi.yaml](https://veeteq.github.io/OpenAPI-DocumentMngr/openapi.yaml)
+[openapi.yaml](https://veeteq.github.io/OpenAPI-DocumentMngr/openapi.yaml)
 
 # OpenAPI Definition Starter
 
