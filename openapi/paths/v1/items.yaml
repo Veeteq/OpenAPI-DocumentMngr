@@ -11,6 +11,7 @@ get:
       description: The page number to retrieve (0-based index).
       schema:
         type: integer
+        default: 0
         example: 0
     - name: pageSize
       in: query
@@ -18,6 +19,7 @@ get:
       description: The number of items to return per page.
       schema:
         type: integer
+        default: 25
         example: 25
     - name: orderBy
       in: query
@@ -25,6 +27,7 @@ get:
       description: The field to order the items by.
       schema:
         type: string
+        default: id
         example: itemName
     - name: orderDirection
       in: query
@@ -33,6 +36,7 @@ get:
       schema:
         type: string
         enum: [asc, desc]
+        default: asc
         example: asc
   responses:
     '200':
