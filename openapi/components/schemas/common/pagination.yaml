@@ -3,17 +3,21 @@ properties:
   pageSize:
     type: integer
     description: Number of items on page.
-    example: 25
+    examples:
+      - 25
   totalItems:
     type: integer
     format: int64
     description: The total number of items available.
-    example: 100
+    examples:
+      - 100
   totalPages:
     type: integer
     description: The total number of pages available.
-    example: 10
+    examples:
+      - 10
   currentPage:
     type: integer
     description: The current page number.
-    example: 1
+    examples:
+      - 1

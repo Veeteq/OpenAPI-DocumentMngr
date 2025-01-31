@@ -94,7 +94,8 @@ properties:
   numberProperty:
     description: Property name's description (type is number)
     type: number
-    example: 8
+    examples:
+      - 8
   numberFloat:
     description: Property name's description (type is number, format is float)
     type: number

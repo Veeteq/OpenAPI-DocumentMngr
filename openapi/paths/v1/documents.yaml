@@ -2,11 +2,12 @@ parameters:
   - name: Accept-Language
     in: header
     description: "The language you prefer for messages. Supported values are `en-AU, en-CA, en-GB, en-US`."
-    example: en-US
-    required: false
+    required: false    
     schema:
         type: string
         default: en-GB
+        examples:
+          - en-US
   - name: cookieParam
     in: cookie
     description: "Example cookie parameter."
@@ -55,7 +56,8 @@ post:
           schema: 
             type: string
             format: url
-            example: /v1/documents/1234
+            examples:
+              - /v1/documents/1234
     '400':
       description: "Not found"
       content:

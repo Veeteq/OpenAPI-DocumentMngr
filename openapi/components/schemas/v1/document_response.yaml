@@ -9,29 +9,34 @@ properties:
     type: integer
     format: int64
     description: Unique identifier for the document
-    example: 12345
+    examples:
+      - 12345
     readOnly: true
   documentDate:
     type: string
     format: date
     description: Date of the document
-    example: "2023-10-01"
+    examples:
+      - "2023-10-01"
   documentType:
     type: string
     description: Type of the document
-    example: "Invoice"
+    examples:
+      - "Invoice"
     minLength: 3
     maxLength: 25
   documentName:
     type: string
     description: Name of the document
-    example: "October Invoice"
+    examples:
+      - "October Invoice"
     minLength: 3
     maxLength: 255
   documentComment:
     type: string
     description: Additional info related to the document
-    example: "Details for October Invoice"
+    examples:
+      - "Details for October Invoice"
   account:
     $ref: 'account.yaml'
     description: Base Account associated with the document
@@ -42,24 +47,28 @@ properties:
     type: number
     format: double
     description: Amount of the document
-    example: 1500.75
+    examples:
+      - 1500.75
   counterparty:
     $ref: 'counterparty.yaml'
     description: Counterparty associated with the document
   currencyCode:
     type: string
     description: Currency code of the document amount
-    example: "USD"
+    examples:
+      - "USD"
   exchangeRate:
     type: number
     format: double
     description: Exchange rate applicable to the document amount
-    example: 1.12
+    examples:
+      - 1.12
   documentItemsCount:
     type: integer
     format: int32
     description: Number of items in the document
-    example: 5
+    examples:
+      - 5
     minimum: 1
   documentItems:
     type: array

@@ -4,21 +4,25 @@ properties:
     type: integer
     format: int64
     description: Unique identifier for the document item
-    example: 98765
+    examples:
+      - 98765
   itemName:
     type: string
     description: Name of the document item
-    example: "Product A"
+    examples:
+      - "Product A"
   itemQuantity:
     type: number
     format: double
     description: Quantity of the document item
-    example: 10.5
+    examples:
+      - 10.5
     minimum: 0.001
   itemPrice:
     type: number
     format: double
     description: Price of the document item
-    example: 99.99
+    examples:
+      - 99.99
     minimum: 0
     exclusiveMinimum: 0

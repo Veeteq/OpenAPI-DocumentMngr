@@ -12,7 +12,8 @@ get:
       schema:
         type: integer
         default: 0
-        example: 0
+        examples:
+          - 0
     - name: pageSize
       in: query
       required: false
@@ -20,7 +21,8 @@ get:
       schema:
         type: integer
         default: 25
-        example: 25
+        examples:
+          - 25
     - name: orderBy
       in: query
       required: false
@@ -28,7 +30,8 @@ get:
       schema:
         type: string
         default: id
-        example: itemName
+        examples:
+          - itemName
     - name: orderDirection
       in: query
       required: false
@@ -37,7 +40,8 @@ get:
         type: string
         enum: [asc, desc]
         default: asc
-        example: asc
+        examples:
+          - asc
   responses:
     '200':
       description: "Success"

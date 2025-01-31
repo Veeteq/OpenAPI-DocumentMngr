@@ -17,7 +17,8 @@ get:
     - name: username
       in: path
       description: "The username for which you want to retrieve the data."
-      example: John78
+      examples:
+        - John78
       required: true
       schema:
         type: string
@@ -46,7 +47,7 @@ get:
         application/json:
           schema:
             $ref: '../components/schemas/User.yaml'
-          example:
+          examples:
             username: 'user1'
             email: 'user@example.com'
     '403':
@@ -86,7 +87,7 @@ put:
       description: Successfully updated the user profile
       content:
         application/json:
-          example:
+          examples:
             status: 200
             message: OK
     '400':
@@ -99,7 +100,7 @@ put:
       description: Method not allowed
       content:
         application/json:
-          example:
+          examples:
             status: 405
             message: Not allowed
 delete:
@@ -114,11 +115,11 @@ delete:
       required: false
       schema:
         type: string
-        example: 'Bearer <TOKEN>'
+        examples: 'Bearer <TOKEN>'
     - name: username
       in: path
       description: "The name of the user profile to be **deleted**."
-      example: John78
+      examples: John78
       required: true
       schema:
         type: string

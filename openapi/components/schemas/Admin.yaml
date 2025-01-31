@@ -12,7 +12,8 @@ allOf:
         type: string
         description: "One or more departments which the admin user controls."
         default: all
-        example: finance
+        examples:
+          - finance
         enum:
           - all 
           - finance
