@@ -4,11 +4,13 @@ properties:
     type: integer
     format: int64
     description: Unique identifier for the account
-    example: 67890
+    examples:
+      - 67890
     readOnly: true
   accountName:
     type: string
     description: Name of the account
-    example: "Main Account"
+    examples:
+      - "Main Account"
 required:
   - accountName

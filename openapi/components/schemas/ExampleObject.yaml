@@ -9,7 +9,8 @@ properties:
     type: string
     minLength: 1
     maxLength: 64
-    example: BunnyRabbit
+    examples:
+      - BunnyRabbit
   container:
     description: "Example object within an object."
     type: object
@@ -17,4 +18,5 @@ properties:
       number:
         type: integer
         description: "Example nullable value in a container object."
-        example: 22
+        examples:
+          - 22

@@ -4,11 +4,13 @@ properties:
     type: integer
     format: int64
     description: Unique identifier for the item
-    example: 12345
+    examples:
+      - 12345
     readOnly: true
   itemName:
     type: string
     description: Name of the item
-    example: "An item"
+    examples:
+      - "An item"
   itemCategory:
     $ref: category.yaml

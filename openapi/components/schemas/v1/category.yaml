@@ -4,11 +4,13 @@ properties:
     type: integer
     format: int64
     description: Unique identifier for the category
-    example: 12345
+    examples:
+      - 12345
     readOnly: true
   categoryName:
     type: string
     description: Name of the category
-    example: "A cateogry for the item"
+    examples:
+      - "A cateogry for the item"
 required:
   - categoryName
