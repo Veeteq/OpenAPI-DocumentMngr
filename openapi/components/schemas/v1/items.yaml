@@ -1,3 +1,18 @@
-type: array
-items:
-  $ref: "item.yaml"
+type: object
+properties:
+  totalItems:
+    type: integer
+    description: The total number of items available.
+    example: 100
+  totalPages:
+    type: integer
+    description: The total number of pages available.
+    example: 10
+  currentPage:
+    type: integer
+    description: The current page number.
+    example: 1
+  items:
+    type: array
+    items:
+      $ref: item.yaml

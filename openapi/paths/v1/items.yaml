@@ -2,8 +2,38 @@ get:
   tags:
     - Item
   summary: "Get list of items"
-  description: "Get list of items"
+  description: "Get paginated list of items"
   operationId: "listItems"
+  parameters: 
+    - name: pageNumber
+      in: query
+      required: false
+      description: The page number to retrieve (0-based index).
+      schema:
+        type: integer
+        example: 0
+    - name: pageSize
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        example: 25
+    - name: orderBy
+      in: query
+      required: false
+      description: The field to order the items by.
+      schema:
+        type: string
+        example: itemName
+    - name: orderDirection
+      in: query
+      required: false
+      description: The direction to order the items (asc or desc).
+      schema:
+        type: string
+        enum: [asc, desc]
+        example: asc
   responses:
     '200':
       description: "Success"
