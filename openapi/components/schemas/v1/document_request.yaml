@@ -11,15 +11,8 @@ properties:
     description: Date of the document
     examples:
       - "2023-10-01"
-  type:
-    type: string
-    description: Type of the document
-    examples:
-      - "Invoice"
-    enum:
-      - Note
-      - Bill
-      - Invoice
+  documentType:
+    $ref: document_type.yaml
   name:
     type: string
     description: Name of the document
