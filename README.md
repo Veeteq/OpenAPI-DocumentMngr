@@ -6,6 +6,10 @@
 ## Or just direct access to the generated OpenAPI file:
 [openapi.yaml](https://veeteq.github.io/OpenAPI-DocumentMngr/openapi.yaml)
 
+
+## Spring Boot project that consumes the OpenAPI
+[BackendApp-DocumentMngr](https://github.com/Veeteq/BackendApp-DocumentMngr)
+
 # OpenAPI Definition Starter
 
 ## How to use this starter

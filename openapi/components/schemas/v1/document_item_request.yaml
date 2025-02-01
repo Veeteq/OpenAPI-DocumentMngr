@@ -1,5 +1,16 @@
 type: object
+required: 
+  - itemType
+  - itemId
+  - itemQuantity
+  - itemPrice
 properties:
+  itemType:
+    type: string
+    description: Type of document item
+    examples: 
+      - Income
+      - Expense  
   itemId:
     type: integer
     format: int64
@@ -26,3 +37,8 @@ properties:
       - 99.99
     minimum: 0
     exclusiveMinimum: 0
+  itemDescription:
+    type: string
+    description: Description for document item
+    examples: 
+      - More details about this item
