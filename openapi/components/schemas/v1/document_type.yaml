@@ -1,0 +1,9 @@
+type: string
+description: Predefined type of the document
+examples:
+  - "Invoice"
+enum:
+  - Note
+  - Bill
+  - Invoice
+  - Transfer
