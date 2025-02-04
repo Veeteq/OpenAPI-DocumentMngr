@@ -13,11 +13,16 @@ properties:
       - "2023-10-01"
   documentType:
     $ref: document_type.yaml
-  name:
+  documentName:
     type: string
     description: Name of the document
     examples:
-      - "October Invoice"
+      - "October Invoice for car insurance"
+  documentDescription:
+    type: string
+    description: Detailed description of the document
+    examples:
+      - "October Invoice"    
   invoiceNumber:
     type:
       - string
