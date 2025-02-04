@@ -17,12 +17,12 @@ properties:
     type: string
     description: Name of the document
     examples:
-      - "October Invoice for car insurance"
+      - "October Invoice"
   documentDescription:
     type: string
     description: Detailed description of the document
     examples:
-      - "October Invoice"    
+      - "October Invoice for car insurance"    
   invoiceNumber:
     type:
       - string
