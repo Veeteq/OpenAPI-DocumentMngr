@@ -4,7 +4,7 @@ get:
   summary: "Get list of items"
   description: "Get paginated list of items"
   operationId: "listItems"
-  parameters: 
+  parameters:
     - name: pageNumber
       in: query
       required: false
@@ -55,3 +55,31 @@ get:
         application/json:
           schema:
             $ref: ../../components/schemas/Problem.yaml
+post:
+  tags:
+    -  Item
+  summary: Create a new Item
+  description: Create a new Item
+  operationId: createItem
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/v1/item.yaml
+  responses:
+    '201':
+      description: Created
+      headers: 
+        Location:
+          description: Resource location of new Item
+          schema: 
+            type: string
+            format: url
+            examples:
+              - /v1/items/1234
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Problem.yaml              
