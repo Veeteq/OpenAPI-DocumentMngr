@@ -11,6 +11,22 @@ properties:
     type: string
     description: Name of the account
     examples:
-      - "Main Account"
+      - Main Account
+  accountDescription:
+    type: string
+    description: Detailed description of the Account
+    examples:
+      - Main Account for Customer
+  accountCurrency:
+    type: string
+    description: Default currency for the Account
+    examples:
+      - USD
+  accountImageUrl:
+    type: string
+    format: url
+    description: Detailed description of the Account
+    examples:
+      - "https://www.pngall.com/wp-content/uploads/1/Bank-Free-PNG-Image.png"            
 required:
   - accountName
