@@ -59,7 +59,7 @@ post:
             examples:
               - /v1/documents/1234
     '400':
-      description: "Not found"
+      description: Bad request
       content:
         application/json:
           schema:

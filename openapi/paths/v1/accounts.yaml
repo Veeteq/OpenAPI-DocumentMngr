@@ -17,3 +17,31 @@ get:
         application/json:
           schema:
             $ref: ../../components/schemas/Problem.yaml
+post:
+  tags:
+    -  Account
+  summary: Create a new Account
+  description: Create a new Account
+  operationId: createAccount
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/v1/account.yaml
+  responses:
+    '201':
+      description: Created
+      headers: 
+        Location:
+          description: Resource location of new Account
+          schema: 
+            type: string
+            format: url
+            examples:
+              - /v1/accounts/1234
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/Problem.yaml             
