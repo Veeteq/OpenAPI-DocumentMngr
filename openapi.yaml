@@ -1,0 +1,941 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: OpenAPI - DocumentManagement System
+  termsOfService: https://example.com/terms/
+  contact:
+    name: Contact our support
+    email: veeteq@gmail.com
+    url: https://github.com/Veeteq
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://redocly.github.io/openapi-template/logo.png
+    altText: OpenAPI example logo
+  description: |
+    This is an **example** API to demonstrate features of the OpenAPI specification.
+servers:
+  - url: http://localhost:8080/api
+  - url: https://{tenant}/api
+    variables:
+      tenant:
+        default: www
+        description: Your tenant id
+security:
+  - basic_auth: []
+tags:
+  - name: Document
+    description: Describes operations on Documents.
+  - name: Item
+    description: Describes operations on Items.
+  - name: Account
+    description: Describes operations on Accounts.
+externalDocs:
+  description: Find out how to create a GitHub repo for your OpenAPI definition.
+  url: https://github.com/Redocly/create-openapi-repo
+paths:
+  /v1/documents:
+    parameters:
+      - name: Accept-Language
+        in: header
+        description: The language you prefer for messages. Supported values are `en-AU, en-CA, en-GB, en-US`.
+        required: false
+        schema:
+          type: string
+          default: en-GB
+          examples:
+            - en-US
+      - name: cookieParam
+        in: cookie
+        description: Example cookie parameter.
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags:
+        - Document
+      summary: Get list of documents
+      description: Get list of documents
+      operationId: listDocuments
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/documents'
+        '400':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      tags:
+        - Document
+      summary: Create a new document
+      description: This operation creates a new financial document
+      operationId: createDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/document_request'
+        description: User request to be added to the database.
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Resource location of new document
+              schema:
+                type: string
+                format: url
+                examples:
+                  - /v1/documents/1234
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /v1/documents/{id}:
+    get:
+      tags:
+        - Document
+      summary: Get document by ID
+      description: Get document by ID
+      operationId: getDocumentById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the document
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_response'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+  /v1/items:
+    get:
+      tags:
+        - Item
+      summary: Get list of items
+      description: Get paginated list of items
+      operationId: listItems
+      parameters:
+        - name: pageNumber
+          in: query
+          required: false
+          description: The page number to retrieve (0-based index).
+          schema:
+            type: integer
+            default: 0
+            examples:
+              - 0
+        - name: pageSize
+          in: query
+          required: false
+          description: The number of items to return per page.
+          schema:
+            type: integer
+            default: 25
+            examples:
+              - 25
+        - name: orderBy
+          in: query
+          required: false
+          description: The field to order the items by.
+          schema:
+            type: string
+            default: id
+            examples:
+              - itemName
+        - name: orderDirection
+          in: query
+          required: false
+          description: The direction to order the items (asc or desc).
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+            examples:
+              - asc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/items_response'
+        '400':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      tags:
+        - Item
+      summary: Create a new Item
+      description: Create a new Item
+      operationId: createItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/item'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Resource location of new Item
+              schema:
+                type: string
+                format: url
+                examples:
+                  - /v1/items/1234
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /v1/items/{id}:
+    get:
+      tags:
+        - Item
+      summary: Get item by ID
+      description: Get item by ID
+      operationId: getItemById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the item
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+  /v1/accounts:
+    get:
+      tags:
+        - Account
+      summary: Get list of accounts
+      description: Get list of accounts
+      operationId: listAccounts
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accounts'
+        '400':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      tags:
+        - Account
+      summary: Create a new Account
+      description: Create a new Account
+      operationId: createAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Resource location of new Account
+              schema:
+                type: string
+                format: url
+                examples:
+                  - /v1/accounts/1234
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /v1/accounts/{id}:
+    get:
+      tags:
+        - Account
+      summary: Get account by ID
+      description: Get single account by ID
+      operationId: getAccountById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the account
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+webhooks:
+  userInfo:
+    post:
+      summary: New user webhook
+      description: Information about a new user in the system.
+      operationId: userInfo
+      tags:
+        - Info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successfully retrieved information about a new user.
+      security:
+        - api_key: []
+components:
+  securitySchemes:
+    main_auth:
+      description: Example description text of the OAuth2 scheme.
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: http://example.com/api/oauth/dialog
+          scopes:
+            read:users: read user info
+            write:users: modify or remove users
+    api_key:
+      description: Example description text of the API key scheme.
+      type: apiKey
+      in: header
+      name: api_key
+    basic_auth:
+      type: http
+      scheme: basic
+  schemas:
+    account:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+          description: Unique identifier for the account
+          examples:
+            - 67890
+          readOnly: true
+        accountName:
+          type: string
+          description: Name of the account
+          examples:
+            - Main Account
+        accountDescription:
+          type: string
+          description: Detailed description of the Account
+          examples:
+            - Main Account for Customer
+        accountCurrency:
+          type: string
+          description: Default currency for the Account
+          examples:
+            - USD
+        accountImageUrl:
+          type: string
+          format: url
+          description: Detailed description of the Account
+          examples:
+            - https://www.pngall.com/wp-content/uploads/1/Bank-Free-PNG-Image.png
+      required:
+        - accountName
+    counterparty:
+      type: object
+      properties:
+        counterpartyId:
+          type: integer
+          format: int64
+          description: Unique identifier for the counterparty
+          examples:
+            - 54321
+          readOnly: true
+        counterpartyName:
+          type: string
+          description: Name of the counterparty
+          examples:
+            - ABC Corp
+    category:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+          description: Unique identifier for the category
+          examples:
+            - 12345
+          readOnly: true
+        categoryName:
+          type: string
+          description: Name of the category
+          examples:
+            - A cateogry for the item
+      required:
+        - categoryName
+    item:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          format: int64
+          description: Unique identifier for the item
+          examples:
+            - 12345
+          readOnly: true
+        itemName:
+          type: string
+          description: Name of the item
+          examples:
+            - An item
+        itemCategory:
+          $ref: '#/components/schemas/category'
+    document_item_response:
+      type: object
+      properties:
+        documentItemId:
+          type: integer
+          format: int64
+          description: Unique identifier for the document item
+          examples:
+            - 98765
+          readOnly: true
+        item:
+          $ref: '#/components/schemas/item'
+          description: Item placed on this document item
+        itemQuantity:
+          type: integer
+          format: int32
+          description: Quantity of the document item
+          examples:
+            - 10
+        itemPrice:
+          type: string
+          description: Price of the document item
+          examples:
+            - 100.5
+          pattern: ^-?(?:0|[1-9]\d{0,2}(?:,?]\d{3})*)(?:\.\d+)?$
+        itemComment:
+          type: string
+          description: Additional details for the document item
+          examples:
+            - Other info about Product A
+    iso_timestamp:
+      type: string
+      format: date-time
+      description: ISO 8601 Timestamp. Date Created and Date Updated are system managed values, should not be sent in request payloads - will be ignored.
+      examples:
+        - '2022-08-22T11:43:06-07:00'
+      title: ISO Timestamp
+      readOnly: true
+    document_response:
+      type: object
+      required:
+        - documentDate
+        - documentType
+        - documentName
+        - account
+      properties:
+        documentId:
+          type: integer
+          format: int64
+          description: Unique identifier for the document
+          examples:
+            - 12345
+          readOnly: true
+        documentDate:
+          type: string
+          format: date
+          description: Date of the document
+          examples:
+            - '2023-10-01'
+        documentType:
+          type: string
+          description: Type of the document
+          examples:
+            - Invoice
+          minLength: 3
+          maxLength: 25
+        documentName:
+          type: string
+          description: Name of the document
+          examples:
+            - October Invoice
+          minLength: 3
+          maxLength: 255
+        documentComment:
+          type: string
+          description: Additional info related to the document
+          examples:
+            - Details for October Invoice
+        account:
+          $ref: '#/components/schemas/account'
+          description: Base Account associated with the document
+        targetAccount:
+          $ref: '#/components/schemas/account'
+          description: Target account associated with the document
+        documentAmount:
+          type: number
+          format: double
+          description: Amount of the document
+          examples:
+            - 1500.75
+        counterparty:
+          $ref: '#/components/schemas/counterparty'
+          description: Counterparty associated with the document
+        currencyCode:
+          type: string
+          description: Currency code of the document amount
+          examples:
+            - USD
+        exchangeRate:
+          type: number
+          format: double
+          description: Exchange rate applicable to the document amount
+          examples:
+            - 1.12
+        documentItemsCount:
+          type: integer
+          format: int32
+          description: Number of items in the document
+          examples:
+            - 5
+          minimum: 1
+        documentItems:
+          type: array
+          description: List of items in the document
+          items:
+            $ref: '#/components/schemas/document_item_response'
+        createDateTime:
+          $ref: '#/components/schemas/iso_timestamp'
+        updateDateTime:
+          $ref: '#/components/schemas/iso_timestamp'
+    documents:
+      type: array
+      items:
+        $ref: '#/components/schemas/document_response'
+    Problem:
+      type: object
+      additionalProperties: true
+      minProperties: 1
+      description: The Problem Details JSON Object [[RFC7807](https://tools.ietf.org/html/rfc7807)].
+      properties:
+        type:
+          type: string
+          description: A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be "about:blank".
+          format: uri
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: The HTTP status code.
+          minimum: 400
+          maximum: 599
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+    document_type:
+      type: string
+      description: Predefined type of the document
+      examples:
+        - Invoice
+      enum:
+        - Note
+        - Bill
+        - Invoice
+        - Transfer
+    document_item_request:
+      type: object
+      required:
+        - itemType
+        - itemId
+        - itemQuantity
+        - itemPrice
+      properties:
+        itemType:
+          type: string
+          description: Type of document item
+          examples:
+            - Income
+            - Expense
+        itemId:
+          type: integer
+          format: int64
+          description: Unique identifier for the document item
+          examples:
+            - 98765
+        itemName:
+          type: string
+          description: Name of the document item
+          examples:
+            - Product A
+        itemQuantity:
+          type: number
+          format: double
+          description: Quantity of the document item
+          examples:
+            - 10.5
+          minimum: 0.001
+        itemPrice:
+          type: number
+          format: double
+          description: Price of the document item
+          examples:
+            - 99.99
+          minimum: 0
+          exclusiveMinimum: 0
+        itemDescription:
+          type: string
+          description: Description for document item
+          examples:
+            - More details about this item
+    document_request:
+      type: object
+      required:
+        - date
+        - type
+        - accountId
+        - paymentMethod
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date of the document
+          examples:
+            - '2023-10-01'
+        documentType:
+          $ref: '#/components/schemas/document_type'
+        documentName:
+          type: string
+          description: Name of the document
+          examples:
+            - October Invoice
+        documentDescription:
+          type: string
+          description: Detailed description of the document
+          examples:
+            - October Invoice for car insurance
+        invoiceNumber:
+          type:
+            - string
+            - 'null'
+          description: Invoice number of the document
+          examples:
+            - INV-12345
+        accountId:
+          type: integer
+          format: int64
+          description: Unique identifier for the account
+          examples:
+            - 67890
+        targetAccountId:
+          type:
+            - integer
+            - 'null'
+          format: int64
+          description: Unique identifier for the target account
+          examples:
+            - 98765
+        transferAmount:
+          type:
+            - number
+            - 'null'
+          format: double
+          description: Amount to be transferred
+          examples:
+            - 1500.75
+        counterpartyId:
+          type:
+            - integer
+            - 'null'
+          format: int64
+          description: Unique identifier for the counterparty
+          examples:
+            - 54321
+        paymentMethod:
+          type: string
+          description: Payment method for the document
+          examples:
+            - Credit Card
+        currencyCode:
+          type: string
+          description: Currency code of the transfer amount
+          examples:
+            - USD
+          default: PLN
+          minLength: 3
+          maxLength: 3
+        exchangeRate:
+          type: number
+          format: double
+          description: Exchange rate applicable to the transfer amount
+          examples:
+            - 1.12
+          minimum: 0
+          exclusiveMinimum: 0
+          multipleOf: 0.000001
+        documentItems:
+          type: array
+          description: List of items in the document
+          items:
+            $ref: '#/components/schemas/document_item_request'
+          minItems: 1
+    pagination:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items on page.
+          examples:
+            - 25
+        totalItems:
+          type: integer
+          format: int64
+          description: The total number of items available.
+          examples:
+            - 100
+        totalPages:
+          type: integer
+          description: The total number of pages available.
+          examples:
+            - 10
+        currentPage:
+          type: integer
+          description: The current page number.
+          examples:
+            - 1
+    items_response:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/pagination'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/item'
+    accounts:
+      type: array
+      items:
+        $ref: '#/components/schemas/account'
+    User:
+      type: object
+      required:
+        - username
+        - status
+      discriminator:
+        propertyName: userType
+        mapping:
+          admin: '#/components/schemas/Admin'
+          basic: '#/components/schemas/Basic'
+      properties:
+        username:
+          description: The username associated with the user profile.
+          type: string
+          minLength: 4
+          maxLength: 32
+          pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/
+          examples:
+            - John78
+        firstName:
+          description: User's first name.
+          type: string
+          minLength: 1
+          examples:
+            - Bunny
+        lastName:
+          description: User's last name.
+          type: string
+          minLength: 1
+          examples:
+            - Rabbit
+        email:
+          $ref: '#/components/schemas/Email'
+        exampleObject:
+          description: Example object to show an expanded schema.
+          allOf:
+            - $ref: '#/components/schemas/ExampleObject'
+        phone:
+          description: User's phone number. Must be provided in international format.
+          type: string
+          pattern: /^\+(?:[0-9]-?){6,14}[0-9]$/
+          maxLength: 32
+          examples:
+            - +4-0800-555-0110
+        profileUrls:
+          description: The list of URLs to user's social media profiles. You must provide the URLs with the scheme (`http` or `https`).
+          type: array
+          maxItems: 10
+          xml:
+            name: profileUrl
+            wrapped: true
+          items:
+            type: string
+            format: url
+          examples:
+            - https://twitter.com/example
+            - https://instagram.com/example
+        recursiveProperty:
+          allOf:
+            - $ref: '#/components/schemas/User'
+        status:
+          description: Status of the user account.
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum:
+              - active
+              - banned
+              - inactive
+        userid:
+          description: Unique ID of the user.
+          externalDocs:
+            description: Example of external documentation link
+            url: https://example.com
+          allOf:
+            - $ref: '#/components/schemas/UserID'
+      xml:
+        name: User
+    Admin:
+      description: Example of a user profile with admin permissions. This type of user is also referred to as an **administrator**.
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            userType:
+              type: string
+              enum:
+                - admin
+                - basic
+            adminDept:
+              type: string
+              description: One or more departments which the admin user controls.
+              default: all
+              examples:
+                - finance
+              enum:
+                - all
+                - finance
+                - hiring
+                - development
+                - support
+                - contractors
+          required:
+            - adminDept
+            - userType
+    Basic:
+      description: Example of a user with basic (restricted) permissions. In total, there are 5 permission levels, but basic users can only use the first three.
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            userType:
+              type: string
+              enum:
+                - admin
+                - basic
+            permissionId:
+              type: integer
+              format: int32
+              description: Identifier of the permission level assigned to the basic user.
+              default: 1
+              minimum: 1
+              maximum: 3
+          required:
+            - permissionId
+            - userType
+    Email:
+      description: User's email address.
+      type: string
+      format: email
+      examples:
+        - bunny.rabbit@example.com
+    UserID:
+      type: integer
+      format: int64
+      readOnly: true
+      examples:
+        - 27
+    ExampleObject:
+      type: object
+      properties:
+        id:
+          description: User ID.
+          allOf:
+            - $ref: '#/components/schemas/UserID'
+        name:
+          description: Example name.
+          type: string
+          minLength: 1
+          maxLength: 64
+          examples:
+            - BunnyRabbit
+        container:
+          description: Example object within an object.
+          type: object
+          properties:
+            number:
+              type: integer
+              description: Example nullable value in a container object.
+              examples:
+                - 22
+x-tagGroups:
+  - name: General
+    tags:
+      - Document
+      - Item
+      - Account
+  - name: Administration
+    tags:
+      - Admin
