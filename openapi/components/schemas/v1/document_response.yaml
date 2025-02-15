@@ -37,6 +37,13 @@ properties:
     description: Additional info related to the document
     examples:
       - "Details for October Invoice"
+  invoiceNumber:
+    type:
+      - string
+      - 'null'
+    description: Invoice number of the document
+    examples:
+      - "INV-12345"   
   account:
     $ref: 'account.yaml'
     description: Base Account associated with the document
@@ -52,6 +59,11 @@ properties:
   counterparty:
     $ref: 'counterparty.yaml'
     description: Counterparty associated with the document
+  paymentMethod:
+    type: string
+    description: Payment method for the document
+    examples:
+      - "Credit Card"    
   currencyCode:
     type: string
     description: Currency code of the document amount
