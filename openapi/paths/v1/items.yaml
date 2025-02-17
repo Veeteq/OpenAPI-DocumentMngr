@@ -65,7 +65,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../../components/schemas/v1/item.yaml
+          $ref: ../../components/schemas/v1/item_request.yaml
   responses:
     '201':
       description: Created
