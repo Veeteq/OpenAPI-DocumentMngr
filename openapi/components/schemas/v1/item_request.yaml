@@ -1,0 +1,20 @@
+type: object
+properties:
+  itemId:
+    type: integer
+    format: int64
+    description: Unique identifier for the item
+    examples:
+      - 12345
+    readOnly: true
+  itemName:
+    type: string
+    description: Name of the item
+    examples:
+      - "An item"
+  categoryId:
+    type: integer
+    format: int64
+    description: ID of the category the item belongs to
+    examples:
+      - 54321
