@@ -8,13 +8,13 @@ parameters:
         default: en-GB
         examples:
           - en-US
-  - name: cookieParam
-    in: cookie
-    description: "Example cookie parameter."
+  - name: Transaction-Id
+    in: header
+    description: "Transaction-Id header parameter."
     required: true
     schema:
-        type: integer
-        format: int64
+        type: string
+        format: UUID
 get:
   tags:
     - Document
