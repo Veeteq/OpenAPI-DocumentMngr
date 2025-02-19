@@ -8,9 +8,12 @@ properties:
   itemType:
     type: string
     description: Type of document item
+    enum:
+      - EXP
+      - INC
     examples: 
-      - Income
-      - Expense  
+      - INC
+      - EXP  
   itemId:
     type: integer
     format: int64
