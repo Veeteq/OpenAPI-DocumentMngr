@@ -22,7 +22,7 @@ properties:
     type: string
     description: Detailed description of the document
     examples:
-      - "October Invoice for car insurance"
+      - "October Invoice for car insurance"    
   invoiceNumber:
     type:
       - string
@@ -82,8 +82,6 @@ properties:
     minimum: 0.0
     exclusiveMinimum: 0.0
     multipleOf: 0.000001
-  version:
-    $ref: ../common/version.yaml
   documentItems:
     type: array
     description: List of items in the document

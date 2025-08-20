@@ -3,19 +3,19 @@ properties:
   documentItemId:
     type: integer
     format: int64
-    description: Unique identifier for the document item
+    description: ID of the Document Item
     examples:
-      - 98765
+      - 12
     readOnly: true
   item:
     $ref: item.yaml
     description: Item placed on this document item
   itemQuantity:
-    type: integer
-    format: int32
+    type: string
     description: Quantity of the document item
     examples:
-      - 10
+      - 11.234
+    pattern: "^-?(?:0|[1-9]\\d{0,2}(?:,?]\\d{3})*)(?:\\.\\d+)?$"
   itemPrice:
     type: string
     #format: double
@@ -27,4 +27,6 @@ properties:
     type: string
     description: Additional details for the document item
     examples:
-      - "Other info about Product A"    
+      - "Other info about Product A"
+  version:
+    $ref: ../common/version.yaml

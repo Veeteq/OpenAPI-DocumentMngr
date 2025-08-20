@@ -23,3 +23,35 @@ get:
       description: "Bad request"
     '404':
       description: "Not found"
+put:      
+  tags: 
+    -  Account
+  summary: Update a Account by ID
+  description:  |
+    Allows to update a Account by its ID
+  operationId: updateAccount
+  parameters: 
+    - name: id
+      in: path
+      description: The ID of the account to update
+      required: true
+      schema: 
+        type: integer
+        format: int64
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/v1/account.yaml
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/v1/account.yaml
+    '400':
+      description: Bad Request 
+    '404':
+      description: Not Found

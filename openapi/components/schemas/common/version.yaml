@@ -1,0 +1,5 @@
+type: integer
+description: Version number of the entity
+title: Version
+examples:
+  - 1

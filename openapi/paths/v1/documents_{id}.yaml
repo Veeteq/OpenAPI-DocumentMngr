@@ -1,17 +1,24 @@
+parameters: 
+  - name: Transaction-Id
+    in: header
+    description: "Transaction-Id header parameter."
+    required: true
+    schema:
+      type: string
+      format: UUID      
+  - name: id
+    in: path
+    description: ID of the document
+    required: true
+    schema: 
+      type: integer
+      format: int64
 get: 
   tags: 
     - Document
   summary: "Get document by ID"
   description: "Get document by ID"
   operationId: "getDocumentById"
-  parameters: 
-    - name: id
-      in: path
-      description: ID of the document
-      required: true
-      schema: 
-        type: integer
-        format: int64
   responses: 
     '200':
       description: "Success"
@@ -23,3 +30,27 @@ get:
       description: "Bad request"
     '404':
       description: "Not found"
+put:      
+  tags: 
+    -  Document
+  summary: Update a Document by ID
+  description:  |
+    Allows to update a Document by its ID
+  operationId: updateDocument
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/v1/document_request.yaml
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/v1/document_response.yaml
+    '400':
+      description: Bad Request 
+    '404':
+      description: Not Found

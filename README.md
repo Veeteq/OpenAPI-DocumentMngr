@@ -1,5 +1,8 @@
 # Document Manager OpenAPI repository
 
+## Initialized with
+[Redocly/OpenAPI Starter](https://github.com/Redocly/openapi-starter)
+
 ## The generated OpenAPI specification can be accessed at:
 [OpenAPI](https://veeteq.github.io/OpenAPI-DocumentMngr/)
 
