@@ -23,3 +23,35 @@ get:
       description: "Bad request"
     '404':
       description: "Not found"
+put:      
+  tags: 
+    -  Item
+  summary: Update an Item by ID
+  description:  |
+    Allows to update an Item by its ID
+  operationId: updateItem
+  parameters: 
+    - name: id
+      in: path
+      description: The ID of the item to update
+      required: true
+      schema: 
+        type: integer
+        format: int64
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/v1/item_request.yaml
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/v1/item.yaml
+    '400':
+      description: Bad Request 
+    '404':
+      description: Not Found
