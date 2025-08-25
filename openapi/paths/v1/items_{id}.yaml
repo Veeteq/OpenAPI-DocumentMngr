@@ -1,41 +1,41 @@
-get: 
-  tags: 
+get:
+  tags:
     - Item
   summary: "Get item by ID"
   description: "Get item by ID"
   operationId: "getItemById"
-  parameters: 
+  parameters:
     - name: id
       in: path
       description: ID of the item
       required: true
-      schema: 
+      schema:
         type: integer
         format: int64
-  responses: 
+  responses:
     '200':
       description: "Success"
       content:
         application/json:
-          schema: 
+          schema:
             $ref: ../../components/schemas/v1/item.yaml
     '400':
       description: "Bad request"
     '404':
       description: "Not found"
-put:      
-  tags: 
+put:
+  tags:
     -  Item
   summary: Update an Item by ID
   description:  |
     Allows to update an Item by its ID
   operationId: updateItem
-  parameters: 
+  parameters:
     - name: id
       in: path
       description: The ID of the item to update
       required: true
-      schema: 
+      schema:
         type: integer
         format: int64
   requestBody:
@@ -52,6 +52,26 @@ put:
           schema:
             $ref: ../../components/schemas/v1/item.yaml
     '400':
-      description: Bad Request 
+      description: Bad Request
+    '404':
+      description: Not Found
+delete:
+  tags:
+    -  Item
+  summary: Delete Item by ID
+  description:  |
+    Allows to delete an Item by its ID
+  operationId: deleteItem
+  parameters:
+    - name: id
+      in: path
+      description: The ID of the item to delete
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    '204':
+      description: No Content
     '404':
       description: Not Found

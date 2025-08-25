@@ -1,41 +1,41 @@
-get: 
-  tags: 
+get:
+  tags:
     - Account
   summary: "Get account by ID"
   description: "Get single account by ID"
   operationId: "getAccountById"
-  parameters: 
+  parameters:
     - name: id
       in: path
       description: ID of the account
       required: true
-      schema: 
+      schema:
         type: integer
         format: int64
-  responses: 
+  responses:
     '200':
       description: "Success"
       content:
         application/json:
-          schema: 
+          schema:
             $ref: ../../components/schemas/v1/account.yaml
     '400':
       description: "Bad request"
     '404':
       description: "Not found"
-put:      
-  tags: 
+put:
+  tags:
     -  Account
   summary: Update a Account by ID
   description:  |
     Allows to update a Account by its ID
   operationId: updateAccount
-  parameters: 
+  parameters:
     - name: id
       in: path
       description: The ID of the account to update
       required: true
-      schema: 
+      schema:
         type: integer
         format: int64
   requestBody:
@@ -52,6 +52,26 @@ put:
           schema:
             $ref: ../../components/schemas/v1/account.yaml
     '400':
-      description: Bad Request 
+      description: Bad Request
+    '404':
+      description: Not Found
+delete:
+  tags:
+    -  Account
+  summary: Delete Account by ID
+  description:  |
+    Allows to delete an Account by its ID
+  operationId: deleteAccount
+  parameters:
+    - name: id
+      in: path
+      description: The ID of the account to delete
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    '204':
+      description: No Content
     '404':
       description: Not Found

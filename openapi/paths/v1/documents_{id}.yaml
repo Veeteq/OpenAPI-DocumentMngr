@@ -1,37 +1,37 @@
-parameters: 
+parameters:
   - name: Transaction-Id
     in: header
     description: "Transaction-Id header parameter."
     required: true
     schema:
       type: string
-      format: UUID      
+      format: UUID
   - name: id
     in: path
     description: ID of the document
     required: true
-    schema: 
+    schema:
       type: integer
       format: int64
-get: 
-  tags: 
+get:
+  tags:
     - Document
   summary: "Get document by ID"
   description: "Get document by ID"
   operationId: "getDocumentById"
-  responses: 
+  responses:
     '200':
       description: "Success"
       content:
         application/json:
-          schema: 
+          schema:
             $ref: ../../components/schemas/v1/document_response.yaml
     '400':
       description: "Bad request"
     '404':
       description: "Not found"
-put:      
-  tags: 
+put:
+  tags:
     -  Document
   summary: Update a Document by ID
   description:  |
@@ -51,6 +51,26 @@ put:
           schema:
             $ref: ../../components/schemas/v1/document_response.yaml
     '400':
-      description: Bad Request 
+      description: Bad Request
+    '404':
+      description: Not Found
+delete:
+  tags:
+    -  Document
+  summary: Delete Document by ID
+  description:  |
+    Allows to delete a Document by its ID
+  operationId: deleteDocument
+  parameters:
+    - name: id
+      in: path
+      description: The ID of the document to delete
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    '204':
+      description: No Content
     '404':
       description: Not Found
