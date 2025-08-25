@@ -45,7 +45,7 @@ post:
         application/json:
           schema:
             $ref: ../../components/schemas/v1/document_request.yaml
-    description: "User request to be added to the database."
+    description: "Document request to be created."
     required: true  
   responses:
     '201':

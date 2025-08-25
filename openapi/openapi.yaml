@@ -54,7 +54,7 @@ paths:
   /v1/accounts:
     $ref: 'paths/v1/accounts.yaml'
   /v1/accounts/{id}:
-    $ref: 'paths/v1/accounts_{id}.yaml'    
+    $ref: 'paths/v1/accounts_{id}.yaml'
 security:
   - basic_auth: []
 components:
