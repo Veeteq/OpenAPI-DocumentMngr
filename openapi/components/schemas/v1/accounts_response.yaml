@@ -1,0 +1,9 @@
+type: object
+allOf: 
+  - $ref: ../common/pagination.yaml  
+  - type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: account.yaml  
