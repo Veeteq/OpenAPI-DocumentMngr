@@ -36,9 +36,9 @@ post:
           description: Resource location of new Account
           schema: 
             type: string
-            format: url
+            format: uri
             examples:
-              - /v1/accounts/1234
+              - /api/v1/accounts/1234
     '400':
       description: Bad request
       content:
