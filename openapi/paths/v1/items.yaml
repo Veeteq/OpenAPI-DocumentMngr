@@ -74,9 +74,9 @@ post:
           description: Resource location of new Item
           schema: 
             type: string
-            format: url
+            format: uri
             examples:
-              - /v1/items/1234
+              - /api/v1/items/1234
     '400':
       description: Bad request
       content:
