@@ -1,9 +1,11 @@
-type: object
-allOf: 
-  - $ref: ../common/pagination.yaml  
+allOf:
+  - type: object
+    $ref: ../common/pagination.yaml
+    additionalProperties: true
   - type: object
     properties:
       data:
         type: array
         items:
-          $ref: item.yaml
+         $ref: item.yaml
+    additionalProperties: true     

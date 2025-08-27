@@ -1,5 +1,5 @@
 type: object
-properties: 
+properties:
   pageSize:
     type: integer
     description: Number of items on page.
