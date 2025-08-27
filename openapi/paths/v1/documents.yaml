@@ -2,7 +2,7 @@ parameters:
   - name: Accept-Language
     in: header
     description: "The language you prefer for messages. Supported values are `en-AU, en-CA, en-GB, en-US`."
-    required: false    
+    required: false
     schema:
         type: string
         default: en-GB
@@ -29,11 +29,7 @@ get:
           schema:
             $ref: ../../components/schemas/v1/documents.yaml
     '400':
-      description: "Not found"
-      content:
-        application/json:
-          schema:
-            $ref: ../../components/schemas/Problem.yaml
+      $ref: ../../components/responses/bad_request_400.yaml
 post:
   tags:
     - Document
@@ -46,21 +42,17 @@ post:
           schema:
             $ref: ../../components/schemas/v1/document_request.yaml
     description: "Document request to be created."
-    required: true  
+    required: true
   responses:
     '201':
       description: "Created"
-      headers: 
+      headers:
         Location:
           description: Resource location of new document
-          schema: 
+          schema:
             type: string
             format: url
             examples:
               - /v1/documents/1234
     '400':
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: ../../components/schemas/Problem.yaml
+      $ref: ../../components/responses/bad_request_400.yaml

@@ -20,9 +20,9 @@ get:
           schema:
             $ref: ../../components/schemas/v1/item.yaml
     '400':
-      description: "Bad request"
+      $ref: ../../components/responses/bad_request_400.yaml
     '404':
-      description: "Not found"
+      $ref: ../../components/responses/not_found_404.yaml
 put:
   tags:
     -  Item
@@ -52,9 +52,9 @@ put:
           schema:
             $ref: ../../components/schemas/v1/item.yaml
     '400':
-      description: Bad Request
+      $ref: ../../components/responses/bad_request_400.yaml
     '404':
-      description: Not Found
+      $ref: ../../components/responses/not_found_404.yaml
 delete:
   tags:
     -  Item
@@ -74,6 +74,6 @@ delete:
     '204':
       description: No Content
     '404':
-      description: Not Found
+      $ref: ../../components/responses/not_found_404.yaml
     '409':
-      description: Conflict
+      $ref: ../../components/responses/conflict_409.yaml
