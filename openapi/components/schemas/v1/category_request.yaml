@@ -1,0 +1,20 @@
+type: object
+properties:
+  categoryId:
+    type: integer
+    format: int64
+    description: Unique identifier for the category
+    examples:
+      - 12345
+    readOnly: true
+  categoryName:
+    type: string
+    description: Name of the category
+    examples:
+      - "A category"
+  categoryType:
+    type: string
+    format: int64
+    description: Type of the category
+    examples:
+      - Inc

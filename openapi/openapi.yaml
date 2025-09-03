@@ -22,6 +22,8 @@ externalDocs:
 tags:
   - name: Document
     description: "Describes operations on Documents."
+  - name: Category
+    description: "Describes operations on Categories."    
   - name: Item
     description: "Describes operations on Items."
   - name: Account
@@ -47,6 +49,10 @@ paths:
     $ref: 'paths/v1/documents.yaml'
   /v1/documents/{id}:
     $ref: 'paths/v1/documents_{id}.yaml'
+  /v1/categories:
+    $ref: 'paths/v1/categories.yaml'
+  /v1/categories/{id}:
+    $ref: 'paths/v1/categories_{id}.yaml'    
   /v1/items:
     $ref: 'paths/v1/items.yaml'
   /v1/items/{id}:
@@ -76,21 +82,3 @@ components:
     basic_auth:
       type: http
       scheme: basic
-webhooks:
-  userInfo:
-    post:
-      summary: New user webhook
-      description: "Information about a new user in the system."
-      operationId: userInfo
-      tags:
-        - Info
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: 'components/schemas/User.yaml'
-      responses:
-        '200':
-          description: "Successfully retrieved information about a new user."
-      security:
-        - api_key: []
