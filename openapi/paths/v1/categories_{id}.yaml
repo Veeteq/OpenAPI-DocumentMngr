@@ -1,0 +1,79 @@
+get:
+  tags:
+    - Category
+  summary: "Get category by ID"
+  description: "Get category by ID"
+  operationId: "getCategoryById"
+  parameters:
+    - name: id
+      in: path
+      description: ID of the Category
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/v1/category.yaml
+    '400':
+      $ref: ../../components/responses/bad_request_400.yaml
+    '404':
+      $ref: ../../components/responses/not_found_404.yaml
+put:
+  tags:
+    -  Category
+  summary: Update an Category by ID
+  description:  |
+    Allows to update an Category by its ID
+  operationId: updateCategory
+  parameters:
+    - name: id
+      in: path
+      description: The ID of the Category to update
+      required: true
+      schema:
+        type: integer
+        format: int64
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/v1/category_request.yaml
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/v1/category.yaml
+    '400':
+      $ref: ../../components/responses/bad_request_400.yaml
+    '404':
+      $ref: ../../components/responses/not_found_404.yaml
+delete:
+  tags:
+    -  Category
+  summary: Delete Category by ID
+  description:  |
+    Allows to delete an Category by its ID
+  operationId: deleteCategory
+  parameters:
+    - name: id
+      in: path
+      description: The ID of the Category to delete
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    '204':
+      description: No Content
+    '404':
+      $ref: ../../components/responses/not_found_404.yaml
+    '409':
+      $ref: ../../components/responses/conflict_409.yaml

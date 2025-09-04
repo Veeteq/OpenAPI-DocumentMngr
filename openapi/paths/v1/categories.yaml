@@ -1,0 +1,77 @@
+get:
+  tags:
+    - Category
+  summary: "Get list of categories"
+  description: "Get paginated list of categories"
+  operationId: "listCategories"
+  parameters:
+    - name: pageNumber
+      in: query
+      required: false
+      description: The page number to retrieve (0-based index).
+      schema:
+        type: integer
+        default: 0
+        examples:
+          - 0
+    - name: pageSize
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        examples:
+          - 25
+    - name: orderBy
+      in: query
+      required: false
+      description: The field to order the items by.
+      schema:
+        type: string
+        default: id
+        examples:
+          - itemName
+    - name: orderDirection
+      in: query
+      required: false
+      description: The direction to order the items (asc or desc).
+      schema:
+        type: string
+        enum: [asc, desc]
+        default: asc
+        examples:
+          - asc
+  responses:
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/v1/categories_response.yaml
+    '400':
+      $ref: ../../components/responses/bad_request_400.yaml
+post:
+  tags:
+    -  Category
+  summary: Create a new Category
+  description: Create a new Category
+  operationId: createCategory
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/v1/category_request.yaml
+  responses:
+    '201':
+      description: Created
+      headers:
+        Location:
+          description: Resource location of new Category
+          schema:
+            type: string
+            format: uri
+            examples:
+              - /api/v1/categories/1234
+    '400':
+      $ref: ../../components/responses/bad_request_400.yaml
