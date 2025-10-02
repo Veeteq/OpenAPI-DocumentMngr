@@ -14,7 +14,10 @@ properties:
       - "A category"
   categoryType:
     type: string
-    format: int64
+    enum:
+      - exp
+      - inc
+      - both
     description: Type of the category
     examples:
-      - Inc
+      - inc
