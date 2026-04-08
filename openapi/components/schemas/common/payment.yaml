@@ -33,7 +33,7 @@ properties:
       - 1.23
     exclusiveMinimum: 0.0
     multipleOf: 0.01
-  provisionAt:  
+  provisionAt:
     type: string
     description: Where the provision amount is to be applied
     examples:

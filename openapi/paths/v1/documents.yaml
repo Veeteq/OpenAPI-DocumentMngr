@@ -27,7 +27,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/v1/documents.yaml
+            $ref: ../../components/schemas/v1/documents_response.yaml
     '400':
       $ref: ../../components/responses/bad_request_400.yaml
 post:
