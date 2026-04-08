@@ -3,7 +3,7 @@ required:
   - documentDate
   - documentType
   - accountId
-  - paymentMethod
+  - payment
 properties:
   documentDate:
     type: string
@@ -60,28 +60,8 @@ properties:
     description: Unique identifier for the counterparty
     examples:
       - 54321
-  paymentMethod:
-    type: string
-    description: Payment method for the document
-    examples:
-      - "Credit Card"
-  currencyCode:
-    type: string
-    description: Currency code of the transfer amount
-    examples:
-      - "USD"
-    default: 'PLN'
-    minLength: 3
-    maxLength: 3
-  exchangeRate:
-    type: number
-    format: double
-    description: Exchange rate applicable to the transfer amount
-    examples:
-      - 1.12
-    minimum: 0.0
-    exclusiveMinimum: 0.0
-    multipleOf: 0.000001
+  payment:
+    $ref: ../common/payment.yaml
   version:
     $ref: ../common/version.yaml
   documentItems:

@@ -1,0 +1,43 @@
+type: object
+required:
+  - paymentMethod
+  - currencyCode
+  - exchangeRate
+properties:
+  paymentMethod:
+    type: string
+    description: Payment method for the document
+    examples:
+      - "Credit Card"
+  currencyCode:
+    type: string
+    description: Currency code of the transfer amount
+    examples:
+      - "USD"
+    default: 'PLN'
+    minLength: 3
+    maxLength: 3
+  exchangeRate:
+    type: number
+    format: double
+    description: Exchange rate applicable to the transfer amount
+    examples:
+      - 1.120000
+    exclusiveMinimum: 0.0
+    multipleOf: 0.000001
+  provisionAmount:
+    type: number
+    format: double
+    description: Provision amount for transfer opeartion
+    examples:
+      - 1.23
+    exclusiveMinimum: 0.0
+    multipleOf: 0.01
+  provisionAt:  
+    type: string
+    description: Where the provision amount is to be applied
+    examples:
+      - "Source"
+    enum:
+      - "Source"
+      - "Target"

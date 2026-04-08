@@ -72,6 +72,6 @@ post:
             type: string
             format: uri
             examples:
-              - /api/v1/accounts/1234
+              - http://example.com/api/v1/accounts/1234
     '400':
       $ref: ../../components/responses/bad_request_400.yaml

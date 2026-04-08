@@ -34,9 +34,6 @@ x-tagGroups:
       - Document
       - Item
       - Account
-  - name: Administration
-    tags:
-      - Admin
 servers:
   - url: http://localhost:8080/api
   - url: https://{tenant}/api
