@@ -15,6 +15,10 @@ parameters:
     schema:
         type: string
         format: UUID
+  - $ref: ../../components/parameters/pagination.yaml#/components/parameters/pageNumber
+  - $ref: ../../components/parameters/pagination.yaml#/components/parameters/pageSize
+  - $ref: ../../components/parameters/pagination.yaml#/components/parameters/orderBy
+  - $ref: ../../components/parameters/pagination.yaml#/components/parameters/orderDirection
 get:
   tags:
     - Document
