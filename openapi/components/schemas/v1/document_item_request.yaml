@@ -44,7 +44,6 @@ properties:
     description: Price of the document item
     examples:
       - 99.99
-    minimum: 0
     exclusiveMinimum: 0
   itemDescription:
     type: string
