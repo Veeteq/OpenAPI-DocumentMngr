@@ -10,10 +10,9 @@ rules:
 theme:
   openapi:
     htmlTemplate: ./docs/index.html
-    theme:
-      colors:
-        primary:
-          main: "#32329f"
+  colors:
+    primary:
+      main: "#32329f"
     generateCodeSamples:
       languages:  # Array of language config objects; indicates in which languages to generate code samples.
         - lang: curl
