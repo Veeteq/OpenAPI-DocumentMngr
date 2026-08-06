@@ -1,20 +1,6 @@
 parameters:
-  - name: Accept-Language
-    in: header
-    description: "The language you prefer for messages. Supported values are `en-AU, en-CA, en-GB, en-US`."
-    required: false
-    schema:
-        type: string
-        default: en-GB
-        examples:
-          - en-US
-  - name: Transaction-Id
-    in: header
-    description: "Transaction-Id header parameter."
-    required: true
-    schema:
-        type: string
-        format: UUID
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Accept-Language
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Transaction-Id
 get:
   tags:
     - Document
@@ -22,6 +8,8 @@ get:
   description: "Get list of documents"
   operationId: "listDocuments"
   parameters:
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Accept-Language
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Transaction-Id
   - $ref: ../../components/parameters/pagination.yaml#/components/parameters/pageNumber
   - $ref: ../../components/parameters/pagination.yaml#/components/parameters/pageSize
   - $ref: ../../components/parameters/pagination.yaml#/components/parameters/orderBy

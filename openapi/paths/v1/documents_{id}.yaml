@@ -1,11 +1,6 @@
 parameters:
-  - name: Transaction-Id
-    in: header
-    description: "Transaction-Id header parameter."
-    required: true
-    schema:
-      type: string
-      format: UUID
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Accept-Language
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Transaction-Id
   - name: id
     in: path
     description: ID of the document
