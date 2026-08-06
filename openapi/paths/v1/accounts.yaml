@@ -1,3 +1,6 @@
+parameters:
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Accept-Language
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Transaction-Id
 get:
   tags:
     - Account
@@ -5,6 +8,8 @@ get:
   description: "Get list of accounts"
   operationId: "listAccounts"
   parameters:
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Accept-Language
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Transaction-Id
   - $ref: ../../components/parameters/pagination.yaml#/components/parameters/pageNumber
   - $ref: ../../components/parameters/pagination.yaml#/components/parameters/pageSize
   - $ref: ../../components/parameters/pagination.yaml#/components/parameters/orderBy
@@ -16,6 +21,9 @@ get:
         application/json:
           schema:
             $ref: ../../components/schemas/v1/accounts_response.yaml
+      headers:
+        Transaction-Id:
+          $ref: ../../components/headers/transaction_id.yaml#/components/headers/Transaction-Id
     '400':
       $ref: ../../components/responses/bad_request_400.yaml
 post:
@@ -37,8 +45,10 @@ post:
           description: Resource location of new Account
           schema:
             type: string
-            format: uri
+            format: uri-reference
             examples:
               - http://example.com/api/v1/accounts/1234
+        Transaction-Id:
+          $ref: ../../components/headers/transaction_id.yaml#/components/headers/Transaction-Id
     '400':
       $ref: ../../components/responses/bad_request_400.yaml

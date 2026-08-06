@@ -1,0 +1,26 @@
+components:
+  parameters:
+    Transaction-Id:
+      name: Transaction-Id
+      in: header
+      description: "Transaction-Id header parameter."
+      required: true
+      schema:
+        type: string
+        format: uuid
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: "The language you prefer for messages."
+      required: false
+      schema:
+        type: string
+        default: pl-PL
+        examples:
+          - en-US 
+        enum:
+          - en-AU
+          - en-CA
+          - en-GB
+          - en-US  
+          - pl-PL

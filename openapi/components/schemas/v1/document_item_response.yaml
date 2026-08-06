@@ -14,16 +14,16 @@ properties:
     type: number
     format: double
     description: Quantity of the document item
+    exclusiveMinimum: 0
     examples:
       - 11.234
-    pattern: "^-?(?:0|[1-9]\\d{0,2}(?:,\\d{3})*)(?:\\.\\d+)?$"
   itemPrice:
     type: number
     format: double
     description: Price of the document item
+    exclusiveMinimum: 0
     examples:
       - 100.50
-    pattern: "^-?(?:0|[1-9]\\d{0,2}(?:,\\d{3})*)(?:\\.\\d+)?$"
   itemComment:
     type: string
     description: Additional details for the document item
