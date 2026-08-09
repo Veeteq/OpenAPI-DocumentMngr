@@ -6,7 +6,7 @@ components:
         type: string
         format: uuid
         examples:
-          - "4c2a4e2e-a2f9-4d0f-b9f8-f6c4b1a0-d1f1-4f2c-b0b8-e0e9c8d2e1f2"
+          - "4c2a4e2e-a2f9-4d0f-b9f8-f6c4b1a0d1f1"
       required: true
     Location:
       description: URI of the created resource
