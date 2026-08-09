@@ -23,7 +23,7 @@ get:
             $ref: ../../components/schemas/v1/accounts_response.yaml
       headers:
         Transaction-Id:
-          $ref: ../../components/headers/transaction_id.yaml#/components/headers/Transaction-Id
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
     '400':
       $ref: ../../components/responses/bad_request_400.yaml
 post:
@@ -42,13 +42,8 @@ post:
       description: Created
       headers:
         Location:
-          description: Resource location of new Account
-          schema:
-            type: string
-            format: uri-reference
-            examples:
-              - http://example.com/api/v1/accounts/1234
+          $ref: ../../components/headers/common.yaml#/components/headers/Location
         Transaction-Id:
-          $ref: ../../components/headers/transaction_id.yaml#/components/headers/Transaction-Id
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
     '400':
       $ref: ../../components/responses/bad_request_400.yaml

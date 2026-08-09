@@ -7,7 +7,7 @@ components:
       required: true
       schema:
         type: string
-        format: uuid
+        format: UUID
     Accept-Language:
       name: Accept-Language
       in: header

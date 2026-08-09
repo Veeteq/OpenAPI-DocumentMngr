@@ -24,7 +24,7 @@ get:
             $ref: ../../components/schemas/v1/account.yaml
       headers:
         Transaction-Id:
-          $ref: ../../components/headers/transaction_id.yaml#/components/headers/Transaction-Id      
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
     '400':
       $ref: ../../components/responses/bad_request_400.yaml
     '404':
@@ -59,7 +59,7 @@ put:
             $ref: ../../components/schemas/v1/account.yaml
       headers:
         Transaction-Id:
-          $ref: ../../components/headers/transaction_id.yaml#/components/headers/Transaction-Id      
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
     '400':
       $ref: ../../components/responses/bad_request_400.yaml
     '404':
@@ -78,13 +78,13 @@ delete:
       required: true
       schema:
         type: integer
-        format: int64    
+        format: int64
   responses:
     '204':
       description: No Content
       headers:
         Transaction-Id:
-          $ref: ../../components/headers/transaction_id.yaml#/components/headers/Transaction-Id
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
     '404':
       $ref: ../../components/responses/not_found_404.yaml
     '409':
