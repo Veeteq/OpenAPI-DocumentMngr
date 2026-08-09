@@ -7,20 +7,15 @@ components:
       required: true
       schema:
         type: string
-        format: UUID
+        format: uuid
     Accept-Language:
       name: Accept-Language
       in: header
-      description: "The language you prefer for messages."
+      description: "The language you prefer for messages. Supported values are: en-AU, en-CA, en-GB, en-US, pl-PL. Default is pl-PL."
       required: false
       schema:
         type: string
         default: pl-PL
         examples:
           - en-US 
-        enum:
-          - en-AU
-          - en-CA
-          - en-GB
-          - en-US  
           - pl-PL
