@@ -21,6 +21,9 @@ get:
         application/json:
           schema:
             $ref: ../../components/schemas/v1/documents_response.yaml
+      headers:
+        Transaction-Id:
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
     '400':
       $ref: ../../components/responses/bad_request_400.yaml
 post:
@@ -41,11 +44,8 @@ post:
       description: "Created"
       headers:
         Location:
-          description: Resource location of new document
-          schema:
-            type: string
-            format: url
-            examples:
-              - http://example.com/v1/documents/1234
+          $ref: ../../components/headers/common.yaml#/components/headers/Location
+        Transaction-Id:
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
     '400':
       $ref: ../../components/responses/bad_request_400.yaml
