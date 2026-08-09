@@ -1,0 +1,1213 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: OpenAPI - DocumentManagement System
+  termsOfService: https://example.com/terms/
+  contact:
+    name: Contact our support
+    email: veeteq@gmail.com
+    url: https://github.com/Veeteq
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://redocly.github.io/openapi-template/logo.png
+    altText: OpenAPI example logo
+  description: |
+    This is an **example** API to demonstrate features of the OpenAPI specification.
+servers:
+  - url: http://localhost:8080/api
+  - url: https://{tenant}/api
+    variables:
+      tenant:
+        default: www
+        description: Your tenant id
+security:
+  - basic_auth: []
+tags:
+  - name: Document
+    description: Describes operations on Documents.
+  - name: Category
+    description: Describes operations on Categories.
+  - name: Item
+    description: Describes operations on Items.
+  - name: Account
+    description: Describes operations on Accounts.
+externalDocs:
+  description: Find out how to create a GitHub repo for your OpenAPI definition.
+  url: https://github.com/Redocly/create-openapi-repo
+paths:
+  /v1/documents:
+    parameters:
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/Transaction-Id'
+    get:
+      tags:
+        - Document
+      summary: Get list of documents
+      description: Get list of documents
+      operationId: listDocuments
+      parameters:
+        - $ref: '#/components/parameters/Accept-Language'
+        - $ref: '#/components/parameters/Transaction-Id'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/orderDirection'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/documents_response'
+          headers:
+            Transaction-Id:
+              $ref: '#/components/headers/Transaction-Id'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+    post:
+      tags:
+        - Document
+      summary: Create a new document
+      description: This operation creates a new financial document
+      operationId: createDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/document_request'
+        description: Document request to be created.
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              $ref: '#/components/headers/Location'
+            Transaction-Id:
+              $ref: '#/components/headers/Transaction-Id'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+  /v1/documents/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/Transaction-Id'
+      - name: id
+        in: path
+        description: ID of the document
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags:
+        - Document
+      summary: Get document by ID
+      description: Get document by ID
+      operationId: getDocumentById
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_response'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+    put:
+      tags:
+        - Document
+      summary: Update a Document by ID
+      description: |
+        Allows to update a Document by its ID
+      operationId: updateDocument
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/document_request'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document_response'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+    delete:
+      tags:
+        - Document
+      summary: Delete Document by ID
+      description: |
+        Allows to delete a Document by its ID
+      operationId: deleteDocument
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the document to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/not_found_404'
+  /v1/categories:
+    get:
+      tags:
+        - Category
+      summary: Get list of categories
+      description: Get paginated list of categories
+      operationId: listCategories
+      parameters:
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/orderDirection'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/categories_response'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+    post:
+      tags:
+        - Category
+      summary: Create a new Category
+      description: Create a new Category
+      operationId: createCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/category_request'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Resource location of new Category
+              schema:
+                type: string
+                format: uri
+                examples:
+                  - http://example.com/api/v1/categories/1234
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+  /v1/categories/{id}:
+    get:
+      tags:
+        - Category
+      summary: Get category by ID
+      description: Get category by ID
+      operationId: getCategoryById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the Category
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/category'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+    put:
+      tags:
+        - Category
+      summary: Update an Category by ID
+      description: |
+        Allows to update an Category by its ID
+      operationId: updateCategory
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the Category to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/category_request'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/category'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+    delete:
+      tags:
+        - Category
+      summary: Delete Category by ID
+      description: |
+        Allows to delete an Category by its ID
+      operationId: deleteCategory
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the Category to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/not_found_404'
+        '409':
+          $ref: '#/components/responses/conflict_409'
+  /v1/items:
+    get:
+      tags:
+        - Item
+      summary: Get list of items
+      description: Get paginated list of items
+      operationId: listItems
+      parameters:
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/orderDirection'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/items_response'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+    post:
+      tags:
+        - Item
+      summary: Create a new Item
+      description: Create a new Item
+      operationId: createItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/item_request'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Resource location of new Item
+              schema:
+                type: string
+                format: uri
+                examples:
+                  - http://example.com/api/v1/items/1234
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+  /v1/items/{id}:
+    get:
+      tags:
+        - Item
+      summary: Get item by ID
+      description: Get item by ID
+      operationId: getItemById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the item
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+    put:
+      tags:
+        - Item
+      summary: Update an Item by ID
+      description: |
+        Allows to update an Item by its ID
+      operationId: updateItem
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the item to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/item_request'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+    delete:
+      tags:
+        - Item
+      summary: Delete Item by ID
+      description: |
+        Allows to delete an Item by its ID
+      operationId: deleteItem
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the item to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/not_found_404'
+        '409':
+          $ref: '#/components/responses/conflict_409'
+  /v1/accounts:
+    parameters:
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/Transaction-Id'
+    get:
+      tags:
+        - Account
+      summary: Get list of accounts
+      description: Get list of accounts
+      operationId: listAccounts
+      parameters:
+        - $ref: '#/components/parameters/Accept-Language'
+        - $ref: '#/components/parameters/Transaction-Id'
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/orderDirection'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accounts_response'
+          headers:
+            Transaction-Id:
+              $ref: '#/components/headers/Transaction-Id'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+    post:
+      tags:
+        - Account
+      summary: Create a new Account
+      description: Create a new Account
+      operationId: createAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              $ref: '#/components/headers/Location'
+            Transaction-Id:
+              $ref: '#/components/headers/Transaction-Id'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+  /v1/accounts/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Accept-Language'
+      - $ref: '#/components/parameters/Transaction-Id'
+    get:
+      tags:
+        - Account
+      summary: Get account by ID
+      description: Get single account by ID
+      operationId: getAccountById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the account
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+          headers:
+            Transaction-Id:
+              $ref: '#/components/headers/Transaction-Id'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+    put:
+      tags:
+        - Account
+      summary: Update a Account by ID
+      description: |
+        Allows to update a Account by its ID
+      operationId: updateAccount
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the account to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+          headers:
+            Transaction-Id:
+              $ref: '#/components/headers/Transaction-Id'
+        '400':
+          $ref: '#/components/responses/bad_request_400'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+    delete:
+      tags:
+        - Account
+      summary: Delete Account by ID
+      description: |
+        Allows to delete an Account by its ID
+      operationId: deleteAccount
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the account to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: No Content
+          headers:
+            Transaction-Id:
+              $ref: '#/components/headers/Transaction-Id'
+        '404':
+          $ref: '#/components/responses/not_found_404'
+        '409':
+          $ref: '#/components/responses/conflict_409'
+components:
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
+  parameters:
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      description: The language you prefer for messages.
+      required: false
+      schema:
+        type: string
+        default: pl-PL
+        examples:
+          - en-US
+        enum:
+          - en-AU
+          - en-CA
+          - en-GB
+          - en-US
+          - pl-PL
+    Transaction-Id:
+      name: Transaction-Id
+      in: header
+      description: Transaction-Id header parameter.
+      required: true
+      schema:
+        type: string
+        format: UUID
+    pageNumber:
+      name: pageNumber
+      in: query
+      required: false
+      description: The page number to retrieve (0-based index).
+      schema:
+        type: integer
+        default: 0
+        examples:
+          - 0
+    pageSize:
+      name: pageSize
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        default: 25
+        examples:
+          - 25
+    orderBy:
+      name: orderBy
+      in: query
+      required: false
+      description: The field to order the items by.
+      schema:
+        type: string
+        default: id
+        examples:
+          - itemName
+    orderDirection:
+      name: orderDirection
+      in: query
+      required: false
+      description: The direction to order the items (asc or desc).
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+        default: asc
+        examples:
+          - asc
+  headers:
+    Transaction-Id:
+      description: Transaction identifier
+      schema:
+        type: string
+        format: UUID
+        examples:
+          - 4c2a4e2e-a2f9-4d0f-b9f8-f6c4b1a0-d1f1-4f2c-b0b8-e0e9c8d2d8c8
+      required: true
+    Location:
+      description: URI of the created resource
+      schema:
+        type: string
+  schemas:
+    pagination:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items on page.
+          examples:
+            - 25
+        totalItems:
+          type: integer
+          format: int64
+          description: The total number of items available.
+          examples:
+            - 100
+        totalPages:
+          type: integer
+          description: The total number of pages available.
+          examples:
+            - 10
+        currentPage:
+          type: integer
+          description: The current page number.
+          examples:
+            - 1
+    account:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+          description: Unique identifier for the account
+          examples:
+            - 67890
+          readOnly: true
+        accountName:
+          type: string
+          description: Name of the account
+          examples:
+            - Main Account
+        accountDescription:
+          type: string
+          description: Detailed description of the Account
+          examples:
+            - Main Account for Customer
+        accountCurrency:
+          type: string
+          description: Default currency for the Account
+          examples:
+            - USD
+        accountImageUrl:
+          type: string
+          format: url
+          description: Detailed description of the Account
+          examples:
+            - https://www.pngall.com/wp-content/uploads/1/Bank-Free-PNG-Image.png
+      required:
+        - accountName
+    counterparty:
+      type: object
+      properties:
+        counterpartyId:
+          type: integer
+          format: int64
+          description: Unique identifier for the counterparty
+          examples:
+            - 54321
+          readOnly: true
+        counterpartyName:
+          type: string
+          description: Name of the counterparty
+          examples:
+            - ABC Corp
+    category:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+          description: Unique identifier for the category
+          examples:
+            - 12345
+          readOnly: true
+        categoryName:
+          type: string
+          description: Name of the category
+          examples:
+            - A cateogry for the item
+      required:
+        - categoryName
+    item:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          format: int64
+          description: Unique identifier for the item
+          examples:
+            - 12345
+          readOnly: true
+        itemName:
+          type: string
+          description: Name of the item
+          examples:
+            - An item
+        itemCategory:
+          $ref: '#/components/schemas/category'
+    version:
+      type: integer
+      description: Version number of the entity
+      title: Version
+      examples:
+        - 1
+    document_item_response:
+      type: object
+      properties:
+        documentItemId:
+          type: integer
+          format: int64
+          description: ID of the Document Item
+          examples:
+            - 12
+          readOnly: true
+        item:
+          $ref: '#/components/schemas/item'
+          description: Item placed on this document item
+        itemQuantity:
+          type: number
+          format: double
+          description: Quantity of the document item
+          exclusiveMinimum: 0
+          examples:
+            - 11.234
+        itemPrice:
+          type: number
+          format: double
+          description: Price of the document item
+          exclusiveMinimum: 0
+          examples:
+            - 100.5
+        itemComment:
+          type: string
+          description: Additional details for the document item
+          examples:
+            - Other info about Product A
+        version:
+          $ref: '#/components/schemas/version'
+    iso_timestamp:
+      type: string
+      format: date-time
+      description: ISO 8601 Timestamp. Date Created and Date Updated are system managed values, should not be sent in request payloads - will be ignored.
+      examples:
+        - '2022-08-22T11:43:06-07:00'
+      title: ISO Timestamp
+      readOnly: true
+    document_response:
+      type: object
+      required:
+        - documentDate
+        - documentType
+        - documentName
+        - account
+      properties:
+        documentId:
+          type: integer
+          format: int64
+          description: Unique identifier for the document
+          examples:
+            - 12345
+          readOnly: true
+        documentDate:
+          type: string
+          format: date
+          description: Date of the document
+          examples:
+            - '2023-10-01'
+        documentType:
+          type: string
+          description: Type of the document
+          examples:
+            - Invoice
+          minLength: 3
+          maxLength: 25
+        documentName:
+          type: string
+          description: Name of the document
+          examples:
+            - October Invoice
+          minLength: 3
+          maxLength: 255
+        documentComment:
+          type: string
+          description: Additional info related to the document
+          examples:
+            - Details for October Invoice
+        invoiceNumber:
+          type:
+            - string
+            - 'null'
+          description: Invoice number of the document
+          examples:
+            - INV-12345
+        account:
+          $ref: '#/components/schemas/account'
+          description: Base Account associated with the document
+        targetAccount:
+          $ref: '#/components/schemas/account'
+          description: Target account associated with the document
+        documentAmount:
+          type: number
+          format: double
+          description: Amount of the document
+          examples:
+            - 1500.75
+        counterparty:
+          $ref: '#/components/schemas/counterparty'
+          description: Counterparty associated with the document
+        paymentMethod:
+          type: string
+          description: Payment method for the document
+          examples:
+            - Credit Card
+        currencyCode:
+          type: string
+          description: Currency code of the document amount
+          examples:
+            - USD
+        exchangeRate:
+          type: number
+          format: double
+          description: Exchange rate applicable to the document amount
+          examples:
+            - 1.12
+        documentItemsCount:
+          type: integer
+          format: int32
+          description: Number of items in the document
+          examples:
+            - 5
+          minimum: 1
+        documentItems:
+          type: array
+          description: List of items in the document
+          items:
+            $ref: '#/components/schemas/document_item_response'
+        createDateTime:
+          $ref: '#/components/schemas/iso_timestamp'
+        updateDateTime:
+          $ref: '#/components/schemas/iso_timestamp'
+        version:
+          $ref: '#/components/schemas/version'
+    documents_response:
+      allOf:
+        - type: object
+          $ref: '#/components/schemas/pagination'
+          additionalProperties: true
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/document_response'
+          additionalProperties: true
+    Problem:
+      type: object
+      additionalProperties: true
+      minProperties: 1
+      description: The Problem Details JSON Object [[RFC7807](https://tools.ietf.org/html/rfc7807)].
+      properties:
+        type:
+          type: string
+          description: A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be "about:blank".
+          format: uri
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+        status:
+          type: integer
+          description: The HTTP status code.
+          minimum: 400
+          maximum: 599
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+    document_type:
+      type: string
+      description: Predefined type of the document
+      examples:
+        - Invoice
+      enum:
+        - Note
+        - Bill
+        - Invoice
+        - Transfer
+    payment:
+      type: object
+      required:
+        - paymentMethod
+        - currencyCode
+        - exchangeRate
+      properties:
+        paymentMethod:
+          type: string
+          description: Payment method for the document
+          examples:
+            - Credit Card
+        currencyCode:
+          type: string
+          description: Currency code of the transfer amount
+          examples:
+            - USD
+          default: PLN
+          minLength: 3
+          maxLength: 3
+        exchangeRate:
+          type: number
+          format: double
+          description: Exchange rate applicable to the transfer amount
+          examples:
+            - 1.234567
+          exclusiveMinimum: 0
+          multipleOf: 0.000001
+        provisionAmount:
+          type: number
+          format: double
+          description: Provision amount for transfer opeartion
+          examples:
+            - 1.23
+          exclusiveMinimum: 0
+          multipleOf: 0.01
+        provisionAt:
+          type: string
+          description: Where the provision amount is to be applied
+          examples:
+            - Source
+          enum:
+            - Source
+            - Target
+    document_item_request:
+      type: object
+      required:
+        - itemType
+        - itemId
+        - itemQuantity
+        - itemPrice
+      properties:
+        seqId:
+          type: number
+          description: Sequence number identifying the document item within parent Document
+          examples:
+            - 1
+            - 2
+        itemType:
+          type: string
+          description: Type of document item
+          enum:
+            - EXP
+            - INC
+          examples:
+            - INC
+            - EXP
+        itemId:
+          type: integer
+          format: int64
+          description: Unique identifier for the document item
+          examples:
+            - 98765
+        itemName:
+          type: string
+          description: Name of the document item
+          examples:
+            - Product A
+        itemQuantity:
+          type: number
+          format: double
+          description: Quantity of the document item
+          examples:
+            - 10.5
+          minimum: 0.001
+        itemPrice:
+          type: number
+          format: double
+          description: Price of the document item
+          examples:
+            - 99.99
+          exclusiveMinimum: 0
+        itemDescription:
+          type: string
+          description: Description for document item
+          examples:
+            - More details about this item
+        version:
+          $ref: '#/components/schemas/version'
+    document_request:
+      type: object
+      required:
+        - documentDate
+        - documentType
+        - accountId
+        - payment
+      properties:
+        documentDate:
+          type: string
+          format: date
+          description: Date of the document
+          examples:
+            - '2023-10-01'
+        documentType:
+          $ref: '#/components/schemas/document_type'
+        documentName:
+          type: string
+          description: Name of the document
+          examples:
+            - October Invoice
+        documentDescription:
+          type: string
+          description: Detailed description of the document
+          examples:
+            - October Invoice for car insurance
+        invoiceNumber:
+          type:
+            - string
+            - 'null'
+          description: Invoice number of the document
+          examples:
+            - INV-12345
+        accountId:
+          type: integer
+          format: int64
+          description: Unique identifier for the account
+          examples:
+            - 67890
+        targetAccountId:
+          type:
+            - integer
+            - 'null'
+          format: int64
+          description: Unique identifier for the target account
+          examples:
+            - 98765
+        transferAmount:
+          type:
+            - number
+            - 'null'
+          format: double
+          description: Amount to be transferred
+          examples:
+            - 1500.75
+        counterpartyId:
+          type:
+            - integer
+            - 'null'
+          format: int64
+          description: Unique identifier for the counterparty
+          examples:
+            - 54321
+        payment:
+          $ref: '#/components/schemas/payment'
+        version:
+          $ref: '#/components/schemas/version'
+        documentItems:
+          type: array
+          description: List of items in the document
+          items:
+            $ref: '#/components/schemas/document_item_request'
+    categories_response:
+      allOf:
+        - type: object
+          $ref: '#/components/schemas/pagination'
+          additionalProperties: true
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/category'
+          additionalProperties: true
+    category_request:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+          description: Unique identifier for the category
+          examples:
+            - 12345
+          readOnly: true
+        categoryName:
+          type: string
+          description: Name of the category
+          examples:
+            - A category
+        categoryType:
+          type: string
+          format: int64
+          description: Type of the category
+          examples:
+            - Inc
+    items_response:
+      allOf:
+        - type: object
+          $ref: '#/components/schemas/pagination'
+          additionalProperties: true
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/item'
+          additionalProperties: true
+    item_request:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          format: int64
+          description: Unique identifier for the item
+          examples:
+            - 12345
+          readOnly: true
+        itemName:
+          type: string
+          description: Name of the item
+          examples:
+            - An item
+        categoryId:
+          type: integer
+          format: int64
+          description: ID of the category the item belongs to
+          examples:
+            - 54321
+    accounts_response:
+      title: AccountResponse
+      allOf:
+        - type: object
+          $ref: '#/components/schemas/pagination'
+          additionalProperties: true
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/account'
+          additionalProperties: true
+  responses:
+    bad_request_400:
+      description: Bad request
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    not_found_404:
+      description: The requested resource was not found.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    conflict_409:
+      description: Conflict
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+x-tagGroups:
+  - name: General
+    tags:
+      - Document
+      - Item
+      - Account
