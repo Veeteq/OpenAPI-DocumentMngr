@@ -1,0 +1,38 @@
+parameters:
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Accept-Language
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Transaction-Id
+get:
+  tags:
+    - Item
+  summary: "Search for items by name"
+  description: "Search for items by name"
+  operationId: "searchItems"
+  parameters:
+    - name: name
+      in: query
+      description: "Name of the item"
+      required: false
+      schema:
+        type: string
+        example: "John"
+    - name: category
+      in: query
+      description: "Item category to search"
+      required: false
+      schema:
+        type: string
+        example: "John"        
+  responses:
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema:
+            type: array
+            items: 
+              $ref: ../../components/schemas/v1/item.yaml
+      headers:
+        Transaction-Id:
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
+    '400':
+      $ref: ../../components/responses/bad_request_400.yaml  

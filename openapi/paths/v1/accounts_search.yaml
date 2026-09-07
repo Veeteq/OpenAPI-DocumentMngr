@@ -1,0 +1,31 @@
+parameters:
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Accept-Language
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Transaction-Id
+get:
+  tags:
+    - Account
+  summary: "Search for accounts by name"
+  description: "Search for accounts by name"
+  operationId: "searchAccounts"
+  parameters:
+    - name: name
+      in: query
+      description: "Name of the account"
+      required: true
+      schema:
+        type: string
+        example: "John"
+  responses:
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema:
+            type: array
+            items: 
+              $ref: ../../components/schemas/v1/account.yaml
+      headers:
+        Transaction-Id:
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
+    '400':
+      $ref: ../../components/responses/bad_request_400.yaml  
