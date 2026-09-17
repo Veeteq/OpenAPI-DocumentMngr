@@ -42,6 +42,7 @@ get:
             type: array
             items: 
               type: string
+              uniqueItems: true
       headers:
         Transaction-Id:
           $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
