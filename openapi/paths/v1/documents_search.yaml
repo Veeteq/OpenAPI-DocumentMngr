@@ -13,7 +13,7 @@ get:
       description: "Document Property to return"
       required: true
       schema:
-        type: string        
+        type: string
         example: DocumentName
         enum:
           - DocumentItemComment
@@ -28,7 +28,7 @@ get:
     - name: distinct
       in: query
       description: "Whether to return distinct items"
-      required: false      
+      required: false
       schema:
         type: boolean
         default: true
@@ -40,11 +40,11 @@ get:
         application/json:
           schema:
             type: array
-            items: 
+            uniqueItems: true
+            items:
               type: string
-              uniqueItems: true
       headers:
         Transaction-Id:
           $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
     '400':
-      $ref: ../../components/responses/bad_request_400.yaml  
+      $ref: ../../components/responses/bad_request_400.yaml
