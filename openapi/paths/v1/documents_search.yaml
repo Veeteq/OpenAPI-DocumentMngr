@@ -1,0 +1,48 @@
+parameters:
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Accept-Language
+  - $ref: ../../components/parameters/headers.yaml#/components/parameters/Transaction-Id
+get:
+  tags:
+    - Document
+  summary: "Search document data and returns list of values for given document property"
+  description: "List values for single document property"
+  operationId: "searchDocuments"
+  parameters:
+    - name: property
+      in: query
+      description: "Document Property to return"
+      required: true
+      schema:
+        type: string        
+        example: DocumentName
+        enum:
+          - DocumentName
+    - name: pattern
+      in: query
+      description: "Pattern to search for"
+      required: true
+      schema:
+        type: string
+        example: "John"
+    - name: distinct
+      in: query
+      description: "Whether to return distinct items"
+      required: false      
+      schema:
+        type: boolean
+        default: true
+        example: true
+  responses:
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema:
+            type: array
+            items: 
+              type: string
+      headers:
+        Transaction-Id:
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
+    '400':
+      $ref: ../../components/responses/bad_request_400.yaml  
