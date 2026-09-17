@@ -16,6 +16,7 @@ get:
         type: string        
         example: DocumentName
         enum:
+          - DocumentItemComment
           - DocumentName
     - name: pattern
       in: query
