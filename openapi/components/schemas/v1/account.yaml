@@ -27,6 +27,11 @@ properties:
     format: url
     description: Detailed description of the Account
     examples:
-      - "https://www.pngall.com/wp-content/uploads/1/Bank-Free-PNG-Image.png"            
+      - "https://www.pngall.com/wp-content/uploads/1/Bank-Free-PNG-Image.png"
+  defaultPaymentMethod:     
+    type: string
+    description: Default payment method for the Account
+    examples: 
+      - Cash
 required:
   - accountName
