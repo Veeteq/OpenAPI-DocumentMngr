@@ -11,7 +11,7 @@ properties:
       - "Credit Card"
   currencyCode:
     type: string
-    description: Currency code of the transfer amount
+    description: Currency code of the financial operation
     examples:
       - "USD"
     default: 'PLN'
@@ -20,24 +20,8 @@ properties:
   exchangeRate:
     type: number
     format: double
-    description: Exchange rate applicable to the transfer amount
+    description: Exchange rate applicable to the financial operation
     examples:
       - 1.234567
     exclusiveMinimum: 0.0
     multipleOf: 0.000001
-  provisionAmount:
-    type: number
-    format: double
-    description: Provision amount for transfer opeartion
-    examples:
-      - 1.23
-    exclusiveMinimum: 0.0
-    multipleOf: 0.01
-  provisionAt:
-    type: string
-    description: Where the provision amount is to be applied
-    examples:
-      - "Source"
-    enum:
-      - "Source"
-      - "Target"

@@ -1,0 +1,58 @@
+type: object
+required:
+  - sourceAccount
+  - sourceAmount
+  - sourceCurrency
+  - targetAccount
+  - targetAmount
+  - targetCurrency
+properties:
+  sourceAccount:
+    $ref: 'account.yaml'
+    description: Source account associated with the transfer
+  sourceAmount:
+    type: number
+    format: double
+    description: Amount to be transferred from the source account
+    examples:
+      - 1500.75
+  sourceCurrency:
+    type: string
+    description: Currency of the source account
+    examples:
+      - "USD"
+  targetAccount:
+    $ref: 'account.yaml'
+    description: Target account associated with the transfer
+  targetAmount:
+    type: number
+    format: double
+    description: Amount of the transfer
+    examples:
+      - 1500.75
+  targetCurrency:
+    type: string
+    description: Currency of the target account
+    examples:
+      - "USD"
+  provisionAt:
+    type:
+      - string
+      - 'null'
+    description: Account side on which the provision is charged
+    enum:
+      - Source
+      - Target
+      - null
+    examples:
+      - "Source"
+  provisionAmount:
+    type:
+      - number
+      - 'null'
+    format: double
+    description: Optional provision charged for the transfer
+    minimum: 0
+    multipleOf: 0.01
+    examples:
+      - 15.00

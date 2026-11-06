@@ -47,15 +47,15 @@ properties:
   account:
     $ref: 'account.yaml'
     description: Base Account associated with the document
-  targetAccount:
-    $ref: 'account.yaml'
-    description: Target account associated with the document
   documentAmount:
-    type: number
+    type: 
+      - number
+      - 'null'
     format: double
-    description: Amount of the document
+    description: Amount of the document. Not applicable for documents with documentType 'Transfer'
     examples:
       - 1500.75
+      - null
   counterparty:
     $ref: 'counterparty.yaml'
     description: Counterparty associated with the document
@@ -87,6 +87,11 @@ properties:
     description: List of items in the document
     items:
       $ref: document_item_response.yaml
+  transferDetails:
+    $ref: 'transfer_details.yaml'
+    description: >
+      Transfer-specific persisted information.
+      Present when documentType is 'Transfer' and absent for other document types
   createDateTime:
     $ref: ../common/iso_timestamp.yaml
   updateDateTime:

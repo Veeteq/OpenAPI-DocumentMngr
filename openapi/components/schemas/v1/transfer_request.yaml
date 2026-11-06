@@ -1,0 +1,42 @@
+type: object
+required:
+  - targetAccountId
+  - transferAmount
+properties:
+  targetAccountId:
+    type: integer
+    format: int64
+    description: Unique identifier of the target account
+    examples:
+      - 7
+
+  transferAmount:
+    type: number
+    format: double
+    description: Amount to be transferred from the source account
+    exclusiveMinimum: 0
+    examples:
+      - 2185.62
+
+  provisionAmount:
+    type:
+      - number
+      - 'null'
+    format: double
+    description: Optional provision charged for the transfer. The currency is determined by provisionAt.
+    minimum: 0
+    multipleOf: 0.01
+    examples:
+      - 15.00
+
+  provisionAt:
+    type:
+      - string
+      - 'null'
+    description: Account side on which the provision is charged
+    enum:
+      - Source
+      - Target
+      - null
+    examples:
+      - Source
