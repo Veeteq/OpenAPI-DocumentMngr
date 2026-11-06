@@ -1,4 +1,9 @@
 type: object
+description: >
+  Request used to create or update a financial document.
+  For Transfer documents, transfer-specific information must be provided
+  in the transfer property, while documentItems and counterpartyId are
+  not applicable.
 required:
   - documentDate
   - documentType
@@ -33,39 +38,30 @@ properties:
   accountId:
     type: integer
     format: int64
-    description: Unique identifier for the account
+    description: >
+      Unique identifier for the account associated with the document.
+      For Transfer documents, this is the source account.
     examples:
       - 67890
-  targetAccountId:
-    type:
-      - integer
-      - 'null'
-    format: int64
-    description: Unique identifier for the target account
-    examples:
-      - 98765
-  transferAmount:
-    type:
-      - number
-      - 'null'
-    format: double
-    description: Amount to be transferred
-    examples:
-      - 1500.75
   counterpartyId:
     type:
       - integer
       - 'null'
     format: int64
-    description: Unique identifier for the counterparty
+    description: Counterparty identifier. Applicable to regular documents. Must be omitted or null for Transfer documents.
     examples:
       - 54321
   payment:
     $ref: ../common/payment.yaml
   version:
     $ref: ../common/version.yaml
+  transfer:
+    oneOf:
+      - $ref: 'transfer_request.yaml'
+      - type: 'null'
+    description: Transfer-specific data. Applicable only when documentType is 'Transfer'. Must be omitted or null for other document types.
   documentItems:
     type: array
-    description: List of items in the document
+    description: List of document items. Applicable to regular documents. Should be omitted or empty when documentType is 'Transfer'.
     items:
       $ref: document_item_request.yaml
