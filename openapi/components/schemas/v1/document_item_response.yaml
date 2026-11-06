@@ -7,6 +7,8 @@ properties:
     examples:
       - 12
     readOnly: true
+  itemType:
+    $ref: ../common/document_item_type.yaml      
   item:
     $ref: item.yaml
     description: Item placed on this document item
