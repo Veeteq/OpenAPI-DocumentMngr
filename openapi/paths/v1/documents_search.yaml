@@ -4,47 +4,30 @@ parameters:
 get:
   tags:
     - Document
-  summary: "Search document data and returns list of values for given document property"
-  description: "List values for single document property"
-  operationId: "searchDocuments"
+  summary: Search documents and returns list of matching resources
+  description: Search for documents using document-level criteria
+  operationId: searchDocuments
   parameters:
-    - name: property
+    - name: documentDate
       in: query
-      description: "Document Property to return"
-      required: true
-      schema:
-        type: string
-        example: DocumentName
-        enum:
-          - DocumentItemComment
-          - DocumentName
-    - name: pattern
-      in: query
-      description: "Pattern to search for"
-      required: true
-      schema:
-        type: string
-        example: "John"
-    - name: distinct
-      in: query
-      description: "Whether to return distinct items"
       required: false
+      description: Date of the documents to return
       schema:
-        type: boolean
-        default: true
-        example: true
+        type: string
+        format: date
+    - $ref: ../../components/parameters/pagination.yaml#/components/parameters/pageNumber
+    - $ref: ../../components/parameters/pagination.yaml#/components/parameters/pageSize
+    - $ref: ../../components/parameters/pagination.yaml#/components/parameters/orderBy
+    - $ref: ../../components/parameters/pagination.yaml#/components/parameters/orderDirection
   responses:
     '200':
-      description: "Success"
+      description: Success
       content:
         application/json:
           schema:
-            type: array
-            uniqueItems: true
-            items:
-              type: string
+            $ref: '../../components/schemas/v1/documents_response.yaml'
       headers:
         Transaction-Id:
-          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id
+          $ref: ../../components/headers/common.yaml#/components/headers/Transaction-Id      
     '400':
-      $ref: ../../components/responses/bad_request_400.yaml
+      $ref: '../../components/responses/bad_request_400.yaml'
