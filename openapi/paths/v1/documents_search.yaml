@@ -4,7 +4,7 @@ parameters:
 get:
   tags:
     - Document
-  summary: Search documents and returns list of matching resources
+  summary: Search for documents
   description: Search for documents using document-level criteria
   operationId: searchDocuments
   parameters:
