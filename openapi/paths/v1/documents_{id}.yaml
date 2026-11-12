@@ -64,8 +64,13 @@ delete:
       schema:
         type: integer
         format: int64
+    - $ref: ../../components/parameters/version.yaml    
   responses:
     '204':
       description: No Content
+    '400':
+      $ref: ../../components/responses/bad_request_400.yaml
     '404':
       $ref: ../../components/responses/not_found_404.yaml
+    '409':
+      $ref: ../../components/responses/conflict_409.yaml
