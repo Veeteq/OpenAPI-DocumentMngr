@@ -4,8 +4,8 @@ parameters:
 get:
   tags:
     - Document
-  summary: "Retrieves list of document metadata, search all documents and returns list of values for given document property"
-  description: "List document matadata values for single document property"
+  summary: "Get list of metadata"
+  description: "Retrieves list of document metadata, search all documents and returns list of values for given document property"
   operationId: "getMetadata"
   parameters:
     - name: property
