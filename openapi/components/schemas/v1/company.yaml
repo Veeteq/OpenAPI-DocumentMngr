@@ -1,0 +1,10 @@
+allOf:
+  - $ref: ./counterparty_base.yaml
+  - type: object
+    required:
+      - companyName
+    properties:
+      companyName:
+        type: string
+      taxId:
+        type: string

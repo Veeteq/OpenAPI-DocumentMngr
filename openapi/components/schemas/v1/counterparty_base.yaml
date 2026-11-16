@@ -1,0 +1,33 @@
+type: object
+required:
+  - type   
+  - id
+  - displayName 
+properties:
+  type:
+    type: string
+    enum:
+      - PERSON
+      - COMPANY
+  id:
+    type: integer
+    format: int64
+    description: Unique identifier for the counterparty
+    examples:
+      - 54321
+    readOnly: true
+  displayName:
+    type: string
+    description: Name of the counterparty
+    examples:
+      - "ABC Corp"
+  address:
+    $ref: '../common/address.yaml'
+  bankAccountNumber:
+    type: string
+  tags:
+    type: array
+    items:
+      type: string
+    examples: 
+      - [tag1, tag2, tag3]

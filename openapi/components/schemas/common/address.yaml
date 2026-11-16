@@ -1,0 +1,15 @@
+type: object
+properties:
+  country:
+    type: string
+  postcode:
+    type: string
+  city:
+    type: string
+  street:
+    type: string
+required:
+  - country
+  - postcode
+  - city
+  - street
