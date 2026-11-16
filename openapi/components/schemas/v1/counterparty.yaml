@@ -1,14 +1,8 @@
-type: object
-properties:
-  counterpartyId:
-    type: integer
-    format: int64
-    description: Unique identifier for the counterparty
-    examples:
-      - 54321
-    readOnly: true
-  counterpartyName:
-    type: string
-    description: Name of the counterparty
-    examples:
-      - "ABC Corp"
+oneOf:
+  - $ref: './person.yaml'
+  - $ref: './company.yaml'
+discriminator:
+  propertyName: type
+  mapping:
+    PERSON: './person.yaml'
+    COMPANY: './company.yaml'
